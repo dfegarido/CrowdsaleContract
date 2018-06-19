@@ -1,11 +1,11 @@
 var HDWalletProvider = require("truffle-hdwallet-provider");
 var infura_apikey = "LXCXcs70wrLpSTS1z3Yb"; // Either use this key or get yours at https://infura.io/signup. It's free.
-var mnemonic = "replace eager finger theme walnut eight early unlock joke audit result lawn";
+var mnemonic = "badge mirror pottery hospital lobster power guilt cabbage clerk power truly interest";
 
 module.exports = {
   networks: {
     development: {
-      host: "localhost",
+      host: "127.0.0.1",
       port: 7545,
       gas: 6500000,
       network_id: "5777"

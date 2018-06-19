@@ -15,9 +15,9 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
   // Token Distribution
   // =============================
   uint256 public maxTokens = 100000000000000000000; // There will be total 100 Hashnode Tokens
-  uint256 public tokensForEcosystem = 20000000000000000000;
-  uint256 public tokensForTeam = 10000000000000000000;
-  uint256 public tokensForBounty = 10000000000000000000;
+  uint256 public tokensForEcosystem = 20000000000000000000; // 20
+  uint256 public tokensForTeam = 10000000000000000000; // 10
+  uint256 public tokensForBounty = 10000000000000000000; //10
   uint256 public totalTokensForSale = 60000000000000000000; // 60 HTs will be sold in Crowdsale
   uint256 public totalTokensForSaleDuringPreICO = 20000000000000000000; // 20 out of 60 HTs will be sold during PreICO
   // ==============================

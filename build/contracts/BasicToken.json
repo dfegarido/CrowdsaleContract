@@ -80,14 +80,14 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b50610281806100206000396000f3006080604052600436106100565763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166318160ddd811461005b57806370a0823114610082578063a9059cbb146100b0575b600080fd5b34801561006757600080fd5b506100706100f5565b60408051918252519081900360200190f35b34801561008e57600080fd5b5061007073ffffffffffffffffffffffffffffffffffffffff600435166100fb565b3480156100bc57600080fd5b506100e173ffffffffffffffffffffffffffffffffffffffff60043516602435610123565b604080519115158252519081900360200190f35b60005481565b73ffffffffffffffffffffffffffffffffffffffff1660009081526001602052604090205490565b600073ffffffffffffffffffffffffffffffffffffffff8316151561014757600080fd5b3360009081526001602052604090205482111561016357600080fd5b33600090815260016020526040902054610183908363ffffffff61022d16565b336000908152600160205260408082209290925573ffffffffffffffffffffffffffffffffffffffff8516815220546101c2908363ffffffff61023f16565b73ffffffffffffffffffffffffffffffffffffffff84166000818152600160209081526040918290209390935580518581529051919233927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9281900390910190a350600192915050565b60008282111561023957fe5b50900390565b60008282018381101561024e57fe5b93925050505600a165627a7a72305820d6f618bab80f159759c54ed7183059e4946d2bb2de838f55fed4e896940739640029",
-  "deployedBytecode": "0x6080604052600436106100565763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166318160ddd811461005b57806370a0823114610082578063a9059cbb146100b0575b600080fd5b34801561006757600080fd5b506100706100f5565b60408051918252519081900360200190f35b34801561008e57600080fd5b5061007073ffffffffffffffffffffffffffffffffffffffff600435166100fb565b3480156100bc57600080fd5b506100e173ffffffffffffffffffffffffffffffffffffffff60043516602435610123565b604080519115158252519081900360200190f35b60005481565b73ffffffffffffffffffffffffffffffffffffffff1660009081526001602052604090205490565b600073ffffffffffffffffffffffffffffffffffffffff8316151561014757600080fd5b3360009081526001602052604090205482111561016357600080fd5b33600090815260016020526040902054610183908363ffffffff61022d16565b336000908152600160205260408082209290925573ffffffffffffffffffffffffffffffffffffffff8516815220546101c2908363ffffffff61023f16565b73ffffffffffffffffffffffffffffffffffffffff84166000818152600160209081526040918290209390935580518581529051919233927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9281900390910190a350600192915050565b60008282111561023957fe5b50900390565b60008282018381101561024e57fe5b93925050505600a165627a7a72305820d6f618bab80f159759c54ed7183059e4946d2bb2de838f55fed4e896940739640029",
+  "bytecode": "0x608060405234801561001057600080fd5b50610281806100206000396000f3006080604052600436106100565763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166318160ddd811461005b57806370a0823114610082578063a9059cbb146100b0575b600080fd5b34801561006757600080fd5b506100706100f5565b60408051918252519081900360200190f35b34801561008e57600080fd5b5061007073ffffffffffffffffffffffffffffffffffffffff600435166100fb565b3480156100bc57600080fd5b506100e173ffffffffffffffffffffffffffffffffffffffff60043516602435610123565b604080519115158252519081900360200190f35b60005481565b73ffffffffffffffffffffffffffffffffffffffff1660009081526001602052604090205490565b600073ffffffffffffffffffffffffffffffffffffffff8316151561014757600080fd5b3360009081526001602052604090205482111561016357600080fd5b33600090815260016020526040902054610183908363ffffffff61022d16565b336000908152600160205260408082209290925573ffffffffffffffffffffffffffffffffffffffff8516815220546101c2908363ffffffff61023f16565b73ffffffffffffffffffffffffffffffffffffffff84166000818152600160209081526040918290209390935580518581529051919233927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9281900390910190a350600192915050565b60008282111561023957fe5b50900390565b60008282018381101561024e57fe5b93925050505600a165627a7a7230582046f34336d363435f9011695b7da2ee0e8e8ffdca600dec5dda67805c7d3f82830029",
+  "deployedBytecode": "0x6080604052600436106100565763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166318160ddd811461005b57806370a0823114610082578063a9059cbb146100b0575b600080fd5b34801561006757600080fd5b506100706100f5565b60408051918252519081900360200190f35b34801561008e57600080fd5b5061007073ffffffffffffffffffffffffffffffffffffffff600435166100fb565b3480156100bc57600080fd5b506100e173ffffffffffffffffffffffffffffffffffffffff60043516602435610123565b604080519115158252519081900360200190f35b60005481565b73ffffffffffffffffffffffffffffffffffffffff1660009081526001602052604090205490565b600073ffffffffffffffffffffffffffffffffffffffff8316151561014757600080fd5b3360009081526001602052604090205482111561016357600080fd5b33600090815260016020526040902054610183908363ffffffff61022d16565b336000908152600160205260408082209290925573ffffffffffffffffffffffffffffffffffffffff8516815220546101c2908363ffffffff61023f16565b73ffffffffffffffffffffffffffffffffffffffff84166000818152600160209081526040918290209390935580518581529051919233927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9281900390910190a350600192915050565b60008282111561023957fe5b50900390565b60008282018381101561024e57fe5b93925050505600a165627a7a7230582046f34336d363435f9011695b7da2ee0e8e8ffdca600dec5dda67805c7d3f82830029",
   "sourceMap": "177:951:10:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;177:951:10;;;;;;;",
   "deployedSourceMap": "177:951:10:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;179:26:12;;8:9:-1;5:2;;;30:1;27;20:12;5:2;179:26:12;;;;;;;;;;;;;;;;;;;;1018:107:10;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;1018:107:10;;;;;;;437:379;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;437:379:10;;;;;;;;;;;;;;;;;;;;;;;;;;;179:26:12;;;;:::o;1018:107:10:-;1104:16;;1074:15;1104:16;;;:8;:16;;;;;;;1018:107::o;437:379::-;500:4;520:17;;;;;512:26;;;;;;571:10;562:20;;;;:8;:20;;;;;;552:30;;;544:39;;;;;;685:10;676:20;;;;:8;:20;;;;;;:32;;701:6;676:32;:24;:32;:::i;:::-;662:10;653:20;;;;:8;:20;;;;;;:55;;;;:20;730:13;;;;;;:25;;748:6;730:25;:17;:25;:::i;:::-;714:13;;;;;;;:8;:13;;;;;;;;;:41;;;;761:33;;;;;;;714:13;;770:10;;761:33;;;;;;;;;;-1:-1:-1;807:4:10;437:379;;;;:::o;584:110:8:-;642:7;664:6;;;;657:14;;;;-1:-1:-1;684:5:8;;;584:110::o;698:129::-;756:7;783:5;;;801:6;;;;794:14;;;;821:1;698:129;-1:-1:-1;;;698:129:8:o",
   "source": "pragma solidity ^0.4.18;\n\n\nimport './ERC20Basic.sol';\nimport '../math/SafeMath.sol';\n\n\n/**\n * @title Basic token\n * @dev Basic version of StandardToken, with no allowances.\n */\ncontract BasicToken is ERC20Basic {\n  using SafeMath for uint256;\n\n  mapping(address => uint256) balances;\n\n  /**\n  * @dev transfer token for a specified address\n  * @param _to The address to transfer to.\n  * @param _value The amount to be transferred.\n  */\n  function transfer(address _to, uint256 _value) public returns (bool) {\n    require(_to != address(0));\n    require(_value <= balances[msg.sender]);\n\n    // SafeMath.sub will throw if there is not enough balance.\n    balances[msg.sender] = balances[msg.sender].sub(_value);\n    balances[_to] = balances[_to].add(_value);\n    Transfer(msg.sender, _to, _value);\n    return true;\n  }\n\n  /**\n  * @dev Gets the balance of the specified address.\n  * @param _owner The address to query the the balance of.\n  * @return An uint256 representing the amount owned by the passed address.\n  */\n  function balanceOf(address _owner) public view returns (uint256 balance) {\n    return balances[_owner];\n  }\n\n}\n",
-  "sourcePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/BasicToken.sol",
+  "sourcePath": "D:\\CrowdsaleContract\\node_modules\\zeppelin-solidity\\contracts\\token\\BasicToken.sol",
   "ast": {
-    "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/BasicToken.sol",
+    "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/BasicToken.sol",
     "exportedSymbols": {
       "BasicToken": [
         1246
@@ -108,7 +108,7 @@
         "src": "0:24:10"
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/ERC20Basic.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/ERC20Basic.sol",
         "file": "./ERC20Basic.sol",
         "id": 1163,
         "nodeType": "ImportDirective",
@@ -119,7 +119,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/math/SafeMath.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/math/SafeMath.sol",
         "file": "../math/SafeMath.sol",
         "id": 1164,
         "nodeType": "ImportDirective",
@@ -1222,7 +1222,7 @@
     "src": "0:1129:10"
   },
   "legacyAST": {
-    "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/BasicToken.sol",
+    "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/BasicToken.sol",
     "exportedSymbols": {
       "BasicToken": [
         1246
@@ -1243,7 +1243,7 @@
         "src": "0:24:10"
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/ERC20Basic.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/ERC20Basic.sol",
         "file": "./ERC20Basic.sol",
         "id": 1163,
         "nodeType": "ImportDirective",
@@ -1254,7 +1254,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/math/SafeMath.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/math/SafeMath.sol",
         "file": "../math/SafeMath.sol",
         "id": 1164,
         "nodeType": "ImportDirective",
@@ -2362,5 +2362,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-06-18T09:11:58.780Z"
+  "updatedAt": "2018-06-19T08:40:56.077Z"
 }

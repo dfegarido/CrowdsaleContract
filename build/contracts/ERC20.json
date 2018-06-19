@@ -180,9 +180,9 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.4.18;\n\n\nimport './ERC20Basic.sol';\n\n\n/**\n * @title ERC20 interface\n * @dev see https://github.com/ethereum/EIPs/issues/20\n */\ncontract ERC20 is ERC20Basic {\n  function allowance(address owner, address spender) public view returns (uint256);\n  function transferFrom(address from, address to, uint256 value) public returns (bool);\n  function approve(address spender, uint256 value) public returns (bool);\n  event Approval(address indexed owner, address indexed spender, uint256 value);\n}\n",
-  "sourcePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/ERC20.sol",
+  "sourcePath": "D:\\CrowdsaleContract\\node_modules\\zeppelin-solidity\\contracts\\token\\ERC20.sol",
   "ast": {
-    "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/ERC20.sol",
+    "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/ERC20.sol",
     "exportedSymbols": {
       "ERC20": [
         1289
@@ -203,7 +203,7 @@
         "src": "0:24:11"
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/ERC20Basic.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/ERC20Basic.sol",
         "file": "./ERC20Basic.sol",
         "id": 1249,
         "nodeType": "ImportDirective",
@@ -705,7 +705,7 @@
     "src": "0:505:11"
   },
   "legacyAST": {
-    "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/ERC20.sol",
+    "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/ERC20.sol",
     "exportedSymbols": {
       "ERC20": [
         1289
@@ -726,7 +726,7 @@
         "src": "0:24:11"
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/token/ERC20Basic.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/ERC20Basic.sol",
         "file": "./ERC20Basic.sol",
         "id": 1249,
         "nodeType": "ImportDirective",
@@ -1233,5 +1233,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-06-18T09:11:58.780Z"
+  "updatedAt": "2018-06-19T08:40:56.078Z"
 }

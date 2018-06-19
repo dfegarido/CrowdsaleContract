@@ -225,9 +225,9 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.4.18;\n\nimport '../math/SafeMath.sol';\nimport '../ownership/Ownable.sol';\nimport './Crowdsale.sol';\n\n/**\n * @title FinalizableCrowdsale\n * @dev Extension of Crowdsale where an owner can do extra work\n * after finishing.\n */\ncontract FinalizableCrowdsale is Crowdsale, Ownable {\n  using SafeMath for uint256;\n\n  bool public isFinalized = false;\n\n  event Finalized();\n\n  /**\n   * @dev Must be called after crowdsale ends, to do some extra finalization\n   * work. Calls the contract's finalization function.\n   */\n  function finalize() onlyOwner public {\n    require(!isFinalized);\n    require(hasEnded());\n\n    finalization();\n    Finalized();\n\n    isFinalized = true;\n  }\n\n  /**\n   * @dev Can be overridden to add finalization logic. The overriding function\n   * should call super.finalization() to ensure the chain of finalization is\n   * executed entirely.\n   */\n  function finalization() internal {\n  }\n}\n",
-  "sourcePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol",
+  "sourcePath": "D:\\CrowdsaleContract\\node_modules\\zeppelin-solidity\\contracts\\crowdsale\\FinalizableCrowdsale.sol",
   "ast": {
-    "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol",
+    "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol",
     "exportedSymbols": {
       "FinalizableCrowdsale": [
         730
@@ -248,7 +248,7 @@
         "src": "0:24:5"
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/math/SafeMath.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/math/SafeMath.sol",
         "file": "../math/SafeMath.sol",
         "id": 685,
         "nodeType": "ImportDirective",
@@ -259,7 +259,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol",
         "file": "../ownership/Ownable.sol",
         "id": 686,
         "nodeType": "ImportDirective",
@@ -270,7 +270,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
         "file": "./Crowdsale.sol",
         "id": 687,
         "nodeType": "ImportDirective",
@@ -784,7 +784,7 @@
     "src": "0:925:5"
   },
   "legacyAST": {
-    "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol",
+    "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol",
     "exportedSymbols": {
       "FinalizableCrowdsale": [
         730
@@ -805,7 +805,7 @@
         "src": "0:24:5"
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/math/SafeMath.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/math/SafeMath.sol",
         "file": "../math/SafeMath.sol",
         "id": 685,
         "nodeType": "ImportDirective",
@@ -816,7 +816,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol",
         "file": "../ownership/Ownable.sol",
         "id": 686,
         "nodeType": "ImportDirective",
@@ -827,7 +827,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/rorou/Desktop/my-ico/node_modules/zeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
         "file": "./Crowdsale.sol",
         "id": 687,
         "nodeType": "ImportDirective",
@@ -1346,5 +1346,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-06-18T09:11:58.778Z"
+  "updatedAt": "2018-06-19T08:40:56.076Z"
 }

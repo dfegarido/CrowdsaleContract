@@ -4,7 +4,8 @@ import './HashnodeToken.sol';
 import '../node_modules/zeppelin-solidity/contracts/crowdsale/CappedCrowdsale.sol';
 import '../node_modules/zeppelin-solidity/contracts/crowdsale/RefundableCrowdsale.sol';
 
-contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale{
+contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
+
 
   // ICO Stage
   // ============
@@ -28,15 +29,15 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale{
   // ===================
 
 
-  // Bonuses variables
+    // Bonuses variables
   uint256 ratePreICOBonus;
   uint256 rateSecondRoundBonus;
   uint256 rateThirdRoundBonus;
   uint256 rateFinalRoundBonus;
   //=======================
 
-  //hold the current rate
-  uint256 public previousRate;
+   //hold the current rate
+   uint256 public previousRate;
 
 
   // Events
@@ -47,51 +48,42 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale{
   // Constructor
   // ============
   function HashnodeCrowdsale(
-  uint256 _startTime, //Start Date for CrowdSale
-  uint256 _endTime, //End of CrowdSale
-  uint256 _rate, // rate per ETH
-  address _wallet, // beneficiary address
-  uint256 _goal, // Goal funds for ETH or Minimum Capital answer in wei (ex 10000000000000000000 = 10 ETH)
-  uint256 _cap, // Max Capital for ETH, answer in wei (ex 500000000000000000000 wei = 500 ETH)
-  
-  // Total Supply
-  uint256 _maxTokens, // 100  
-  //Token Distribution
-  uint256[5] _forDistribution,
-  /*
-  uint256 _tokenForEcosystem, // ex 10
-  uint256 _tokenForTeam, // ex 10
-  uint256 _tokenForBountyAndAirdrop, // ex 30
-  uint256 _totalTokenForSale, // ex 50
-  uint256 _totalTokenForSaleDuringPreICO, //ex 20
-  */
-  
+    uint256 _startTime, 
+    uint256 _endTime, 
+    uint256 _rate, 
+    address _wallet, 
+    uint256 _goal,
+     uint256 _cap,
 
+    // Total Supply
+    uint256 _maxTokens, // 100  
+    //Token Distribution
+    uint256[5] _forDistribution,
+    
+    // uint256 _tokenForEcosystem, // ex 10
+    // uint256 _tokenForTeam, // ex 10
+    // uint256 _tokenForBountyAndAirdrop, // ex 30
+    // uint256 _totalTokenForSale, // ex 50
+    // uint256 _totalTokenForSaleDuringPreICO, //ex 20
 
-  // ICO Specs
-  /*
-  string _name, // VPN Cash Coin
-  string _symbol, // VPN
-  uint8 _decimals, // Decimals (ex 18)
-*/
-  //Bonuses
-  uint256[4] _forBonus
+     uint256[4] _forBonus
 
 
 
-  ) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
+
+
+
+     ) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
       require(_goal <= _cap);
+
       maxTokens = valueInWei(_maxTokens);
       tokensForEcosystem = valueInWei(_forDistribution[0]); 
       tokensForTeam = valueInWei(_forDistribution[1]); 
       tokensForBountyAndAirDrop = valueInWei(_forDistribution[2]); 
       totalTokensForSale = valueInWei(_forDistribution[3]); 
       totalTokensForSaleDuringPreICO = valueInWei(_forDistribution[4]); 
-      /*
-      name = _name;
-      symbol = _symbol;
-      decimals = _decimals;
-      */
+      
+
       ratePreICOBonus = _forBonus[0]; // 40 percent +
       rateSecondRoundBonus = _forBonus[1]; // 30 percent +
       rateThirdRoundBonus = _forBonus[2]; // 20 percent +
@@ -99,20 +91,21 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale{
 
       /**/
       previousRate = _rate;
-
       setCrowdsaleStage(0);
-      
   }
 
+
+  // Value in Wei
   function valueInWei(uint256 _value) internal returns(uint256){
-      
-      return _value * 10 ** uint256(18);
+    
+    return _value * 10 ** uint256(18);
   }
   // =============
-  
 
 
 
+
+  // =============
 
   // Token Deployment
   // =================
@@ -172,7 +165,7 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale{
   }
 
   // Change the current rate
-  function setCurrentRate(uint256 _rate) onlyOwner public payable {
+  function setCurrentRate(uint256 _rate) private {
       rate = _rate;
   }
 
@@ -230,6 +223,6 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale{
   // REMOVE THIS FUNCTION ONCE YOU ARE READY FOR PRODUCTION
   // USEFUL FOR TESTING `finish()` FUNCTION
   //function hasEnded() public view returns (bool) {
-  //  return true;
+  // return true;
   //}
 }

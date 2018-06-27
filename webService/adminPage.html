@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>VPN Cash Demo</title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+
+
+
+<body>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<div class="container">
+
+	<div class="row">
+		<!-- /* Hard Cap */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="capresult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="capButton"> CAP </button>
+		</div>
+
+		<!-- /* Crowdsale End Time */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="endTimeResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="endTime"> End Time </button><br />
+		</div>
+
+		<!-- /* Crowdsale Start Time */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="startTimeResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="startTime"> Start Time </button><br />
+		</div>
+
+		<!-- /* Goal or Soft Cap */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="goalResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="goal"> Goal </button><br />
+		</div>
+
+
+		<!-- /* Check if the goal cap reached */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="goalReachedResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="goalReached"> Goal Reached ? </button><br />
+		</div>
+
+		<!-- /* Check if the Crowdsale ended */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="hasEndedResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="hasEnded"> Has Ended ? </button><br />
+		</div>
+
+		<!-- /* Check if the Crowdsale already finalized by the owner */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="isFinalizedResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="isFinalized"> is Finalized ? </button><br />
+		</div>
+
+		<!-- /* Max Tokens or Total Supply */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="maxTokensResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="maxTokens"> Max Tokens </button><br />
+		</div>
+
+		<!-- /* Check Owners Wallet */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="ownerResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="owner"> Owner </button><br />
+		</div>
+
+		<!-- /* Check Rate */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="rateResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="rate"> Rate </button><br />
+		</div>
+
+		<!-- /* Check Crowdsale Stage */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="stageResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="stage"> Stage </button><br />
+		</div>
+
+		<!-- /* Check Tokens Wallet */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="tokenResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="token"> Tokens Wallet </button><br />
+		</div>
+
+		<!-- /* Check tokens allocation for Airdrop and Bounty */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="tokensForBountyAndAirDropResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="tokensForBountyAndAirDrop"> Tokens Allocation for Airdrop </button><br />
+		</div>
+
+		<!-- /* Check tokens allocation for Ecosystem */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="tokensForEcosystemResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="tokensForEcosystem"> Tokens Allocation for Ecosystem </button><br />
+		</div>
+
+		<!-- /* Check tokens allocation for team */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="tokensForTeamResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="tokensForTeam"> Tokens Allocation for Team </button><br />
+		</div>
+
+		<!-- /* Check tokens allocation that for Sale */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="totalTokensForSaleResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="totalTokensForSale"> Tokens Allocation for Sale </button><br />
+		</div>
+
+		<!-- /* Check the total tokens for sale during pre ico */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="totalTokensForSaleDuringPreICOResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="totalTokensForSaleDuringPreICO"> Total Tokens for Sale During PreICO </button><br />
+		</div>
+
+		<!-- /* Check the wallet address */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="walletResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="wallet"> Wallet Address </button><br />
+		</div>
+
+		<!-- /* Check the total funded raised */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<span>Result : <b id="weiRaisedResult"></b></span><br />
+			<button class="btn btn-primary btn-sm" id="weiRaised"> Total Funded Raised </button><br />
+		</div>
+
+		<!-- /* Set Crowdsale Stage */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<div class="form-group">
+			  <label for="setCrowdsaleStage">Select list:</label>
+			  <select class="form-control" id="setCrowdsaleStage">
+			    <option>Pre ICO</option>
+			    <option>Second Stage</option>
+			    <option>Third Stage</option>
+			    <option>Final Stage</option>
+			  </select>
+			</div>
+			<button class="btn btn-primary btn-sm" id="crowdsaleStageButton"> Set CrowdSale Stage </button><br />
+			<span>Result : <b id="setCrowdsaleStageResult"></b></span><br />
+		</div>
+
+
+
+	
+		
+	</div>
+</div>
+
+
+<script>
+	if (typeof web3 !== 'undefined') {
+	    // Mist, Metamask
+	    web3 = new Web3(web3.currentProvider);
+	} else {
+	    // set the provider you want from Web3.providers
+	    console.log("not connected on Metamask");
+	}
+
+	var myWallet = web3.eth.accounts[0];
+	web3.eth.defaultAccount = myWallet;
+
+	var abi = [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "beneficiary",
+						"type": "address"
+					}
+				],
+				"name": "buyTokens",
+				"outputs": [],
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "purchaser",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "beneficiary",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "TokenPurchase",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"name": "text",
+						"type": "string"
+					}
+				],
+				"name": "EthTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"name": "text",
+						"type": "string"
+					}
+				],
+				"name": "EthRefunded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [],
+				"name": "Finalized",
+				"type": "event"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "claimRefund",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_endTime",
+						"type": "uint256"
+					}
+				],
+				"name": "extendEndTime",
+				"outputs": [],
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "finalize",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_teamFund",
+						"type": "address"
+					},
+					{
+						"name": "_ecosystemFund",
+						"type": "address"
+					},
+					{
+						"name": "_bountyFund",
+						"type": "address"
+					}
+				],
+				"name": "finish",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "setCrowdsaleStage",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_rate",
+						"type": "uint256"
+					}
+				],
+				"name": "setCurrentRate",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "fallback"
+			},
+			{
+				"inputs": [
+					{
+						"name": "_startTime",
+						"type": "uint256"
+					},
+					{
+						"name": "_endTime",
+						"type": "uint256"
+					},
+					{
+						"name": "_rate",
+						"type": "uint256"
+					},
+					{
+						"name": "_wallet",
+						"type": "address"
+					},
+					{
+						"name": "_goal",
+						"type": "uint256"
+					},
+					{
+						"name": "_cap",
+						"type": "uint256"
+					},
+					{
+						"name": "_maxTokens",
+						"type": "uint256"
+					},
+					{
+						"name": "_forDistribution",
+						"type": "uint256[5]"
+					},
+					{
+						"name": "_forBonus",
+						"type": "uint256[4]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "cap",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "endTime",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "goal",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "goalReached",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "hasEnded",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "isFinalized",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "maxTokens",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "rate",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "stage",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "startTime",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "token",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "tokensForBountyAndAirDrop",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "tokensForEcosystem",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "tokensForTeam",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "totalTokensForSale",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "totalTokensForSaleDuringPreICO",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "totalWeiRaisedDuringPreICO",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "vault",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "wallet",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "weiRaised",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			}
+		];
+
+	var tokenContract = web3.eth.contract(abi);
+	var token = tokenContract.at("0xb490648c08ef0c742d50a1077e26d8fe0051daf5");
+
+	$("#capButton").on('click', function(){
+		token.cap(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("capresult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#endTime").on('click', function(){
+		token.endTime(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("endTimeResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#startTime").on('click', function(){
+		token.startTime(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("startTimeResult").innerHTML = result.toString()}
+		});
+	});
+
+
+	$("#goal").on('click', function(){
+		token.goal(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("goalResult").innerHTML = result.toString()}
+		});
+	});
+
+
+	$("#goalReached").on('click', function(){
+		token.goalReached(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("goalReachedResult").innerHTML = result.toString()}
+		});
+	});
+
+
+	$("#hasEnded").on('click', function(){
+		token.hasEnded(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("hasEndedResult").innerHTML = result.toString()}
+		});
+	});
+
+
+	$("#isFinalized").on('click', function(){
+		token.isFinalized(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("isFinalizedResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#maxTokens").on('click', function(){
+		token.maxTokens(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("maxTokensResult").innerHTML = result.toNumber()}
+		});
+	});
+
+	$("#owner").on('click', function(){
+		token.owner(function(err,res){if(!err){document.getElementById("ownerResult").innerText = res.toString()}})
+	});
+
+	$("#rate").on('click', function(){
+		token.rate(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("rateResult").innerHTML = result.toString()}
+		});
+	});
+	
+	$("#stage").on('click', function(){
+		token.stage(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("stageResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#token").on('click', function(){
+		token.token(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("tokenResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#tokensForBountyAndAirDrop").on('click', function(){
+		token.tokensForBountyAndAirDrop(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("tokensForBountyAndAirDropResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#tokensForEcosystem").on('click', function(){
+		token.tokensForEcosystem(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("tokensForEcosystemResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#tokensForTeam").on('click', function(){
+		token.tokensForTeam(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("tokensForTeamResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#totalTokensForSale").on('click', function(){
+		token.totalTokensForSale(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("totalTokensForSaleResult").innerHTML = result.toString()}
+		});
+	});
+
+
+
+	$("#totalTokensForSaleDuringPreICO").on('click', function(){
+		token.totalTokensForSaleDuringPreICO(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("totalTokensForSaleDuringPreICOResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#wallet").on('click', function(){
+		token.wallet(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("walletResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#weiRaised").on('click', function(){
+		token.weiRaised(function(error, result){
+			if(error){console.log(error)}else{document.getElementById("weiRaisedResult").innerHTML = result.toString()}
+		});
+	});
+
+	$("#crowdsaleStageButton").on('click', function(){
+		var selectedStage = $("#setCrowdsaleStage").val();
+		token.setCrowdsaleStage(selectedStage, function(err, res){if(!err){document.getElementById("setCrowdsaleStageResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result </a>"}});
+	});
+
+
+
+
+
+
+
+</script>
+
+</body>
+
+
+</html>

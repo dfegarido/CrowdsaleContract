@@ -55,9 +55,9 @@ contract('HashnodeCrowdsale', function(accounts) {
 
     it('should set stage to ICO', function(done){
         HashnodeCrowdsale.deployed().then(async function(instance) {
-          await instance.setCrowdsaleStage(1);
+          await instance.setCrowdsaleStage(4);
           const stage = await instance.stage.call();
-          assert.equal(stage.toNumber(), 1, 'The stage couldn\'t be set to ICO');
+          assert.equal(stage.toNumber(), 4, 'The stage couldn\'t be set to ICO');
           done();
        });
     });
@@ -68,7 +68,7 @@ contract('HashnodeCrowdsale', function(accounts) {
             const tokenAddress = await instance.token.call();
             const hashnodeToken = HashnodeToken.at(tokenAddress);
             const tokenAmount = await hashnodeToken.balanceOf(accounts[2]);
-            assert.equal(tokenAmount.toNumber(), 3000000000000000000, 'The sender didn\'t receive the tokens as per ICO rate');
+            assert.equal(tokenAmount.toNumber(), 7500000000000000000, 'The sender didn\'t receive the tokens as per ICO rate');
             done();
        });
     });

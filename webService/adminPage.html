@@ -149,15 +149,73 @@
 			<div class="form-group">
 			  <label for="setCrowdsaleStage">Select list:</label>
 			  <select class="form-control" id="setCrowdsaleStage">
-			    <option>Pre ICO</option>
-			    <option>Second Stage</option>
-			    <option>Third Stage</option>
-			    <option>Final Stage</option>
+			    <option value="0">Pre ICO</option>
+			    <option value="1">Second Stage</option>
+			    <option value="2">Third Stage</option>
+			    <option value="3">Final Stage</option>
 			  </select>
 			</div>
 			<button class="btn btn-primary btn-sm" id="crowdsaleStageButton"> Set CrowdSale Stage </button><br />
 			<span>Result : <b id="setCrowdsaleStageResult"></b></span><br />
 		</div>
+
+		<!-- /* Set wallet to distribute funds */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<label>If Crowdsale Has already ended, This Distributed Funds will be filled by wallets!!!</label>
+			<div class="form-group">
+			  <input type="text" class="form-control " id="forTeamFunds" placeholder="Wallet Address For Team Funds" >
+			</div>
+			<div class="form-group">
+			  <input type="text" class="form-control" id="forEcosystemFunds" placeholder="Wallet Address For Ecosystem Funds">
+			</div>
+			<div class="form-group">
+			  <input type="text" class="form-control" id="forBoundAndAirdropFunds" placeholder="Wallet Address For Bounty and Airdrop Funds">
+			</div>
+			<button class="btn btn-primary btn-sm" id="distributeFunds"> Distribute Funds </button><br />
+			<span>Result : <b id="distributeFundsResult"></b></span><br />
+		</div>
+
+		<!-- /* Transfer the ownership of this contract */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<div class="form-group">
+			  <input type="text" class="form-control " id="newOwnership" placeholder="New Owner Address" >
+			</div>
+			<button class="btn btn-primary btn-sm" id="newOwnershipButton"> Transfer Ownership </button><br />
+			<span>Result : <b id="newOwnershipResult"></b></span><br />
+		</div>
+
+		<!-- /* This finalized function will be trigger by the owner if the goal reached and the crowdsale has ended */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<button class="btn btn-primary btn-sm" id="finalizedButton"> Finalized the Crowdsale </button><br />
+			<span>Result : <b id="finalizedResult"></b></span><br />
+		</div>
+
+		<!-- /* Extend the time of the Crowdsale if it is not Ended */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<div class="form-group">
+			  <input type="date" class="form-control " id="extendEndTime" placeholder="mm/dd/yyyy" >
+			</div>
+			<button class="btn btn-primary btn-sm" id="extendEndTimeButton"> Extend the Crowdsale </button><br />
+			<span>Result : <b id="extendEndTimeResult"></b></span><br />
+		</div>
+
+		<!-- /* Buy Tokens */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<div class="form-group">
+			  <label for="buyTokens">Min of 1 ETH : 1 ETH = 100 VPN</label>
+			  <input type="text" class="form-control " id="buyerAddress" placeholder="Enter beneficiary address" required><br />
+			  <input type="text" class="form-control " id="ethAmount" placeholder="Enter the ETH Amount!!!" required>
+			</div>
+			<button class="btn btn-success btn-sm" id="buyTokensButton"> Buy  </button><br />
+			<span>Result : <b id="buyTokensResult"></b></span><br />
+		</div>
+
+		<!-- /* This function will refunds if the crowdsale is not successful */ -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<button class="btn btn-primary btn-sm" id="claimRefund"> Claim Refund </button><br />
+			<span>Result : <b id="claimRefundResult"></b></span><br />
+		</div>
+
 
 
 
@@ -174,6 +232,7 @@
 	} else {
 	    // set the provider you want from Web3.providers
 	    console.log("not connected on Metamask");
+	    alert("need to install metamask https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en");
 	}
 
 	var myWallet = web3.eth.accounts[0];
@@ -789,6 +848,18 @@
 	var tokenContract = web3.eth.contract(abi);
 	var token = tokenContract.at("0xb490648c08ef0c742d50a1077e26d8fe0051daf5");
 
+	var hasEnded = "false";
+	var isFundsAreDistributed = false;
+	var isFinalized;
+	var goalReached;
+	var rate;
+	var transactionPrice = {from:web3.eth.accounts[0], gas:900000, gasPrice:web3.toWei("1","gwei")};
+
+	$(window).on('load',function(){
+		$("#rate").click();
+		$("#hasEnded").click();
+	});
+
 	$("#capButton").on('click', function(){
 		token.cap(function(error, result){
 			if(error){console.log(error)}else{document.getElementById("capresult").innerHTML = result.toString()}
@@ -817,21 +888,34 @@
 
 	$("#goalReached").on('click', function(){
 		token.goalReached(function(error, result){
-			if(error){console.log(error)}else{document.getElementById("goalReachedResult").innerHTML = result.toString()}
+			if(error){
+				console.log(error)
+			}else{
+				document.getElementById("goalReachedResult").innerHTML = result.toString();
+				goalReached = result.toString();
+			}
 		});
 	});
 
 
 	$("#hasEnded").on('click', function(){
 		token.hasEnded(function(error, result){
-			if(error){console.log(error)}else{document.getElementById("hasEndedResult").innerHTML = result.toString()}
+			if(error){console.log(error)}else{
+				document.getElementById("hasEndedResult").innerHTML = result.toString();
+				hasEnded = result.toString();
+			}
 		});
 	});
 
 
 	$("#isFinalized").on('click', function(){
 		token.isFinalized(function(error, result){
-			if(error){console.log(error)}else{document.getElementById("isFinalizedResult").innerHTML = result.toString()}
+			if(error){
+				console.log(error)
+			}else{
+				document.getElementById("isFinalizedResult").innerHTML = result.toString();
+				isFinalized = result.toString();
+			}
 		});
 	});
 
@@ -847,13 +931,31 @@
 
 	$("#rate").on('click', function(){
 		token.rate(function(error, result){
-			if(error){console.log(error)}else{document.getElementById("rateResult").innerHTML = result.toString()}
+			if(error){
+				console.log(error)
+			}else{
+				document.getElementById("rateResult").innerHTML = result.toNumber();
+				rate = result.toNumber();
+			}
 		});
 	});
 	
 	$("#stage").on('click', function(){
 		token.stage(function(error, result){
-			if(error){console.log(error)}else{document.getElementById("stageResult").innerHTML = result.toString()}
+			if(error){
+				console.log(error)
+			}else{
+				
+				if(result.toNumber() == 0){
+					document.getElementById("stageResult").innerHTML = "Pre ICO";
+				}else if(result.toNumber() == 1){
+					document.getElementById("stageResult").innerHTML = "Second Stage";
+				}else if(result.toNumber() == 2){
+					document.getElementById("stageResult").innerHTML = "Third Stage";
+				}else if(result.toNumber() == 3){
+					document.getElementById("stageResult").innerHTML = "Final Stage";
+				}
+			}
 		});
 	});
 
@@ -909,8 +1011,79 @@
 
 	$("#crowdsaleStageButton").on('click', function(){
 		var selectedStage = $("#setCrowdsaleStage").val();
-		token.setCrowdsaleStage(selectedStage, function(err, res){if(!err){document.getElementById("setCrowdsaleStageResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result </a>"}});
+		//console.log(selectedStage)
+		token.setCrowdsaleStage(selectedStage, transactionPrice, function(err, res){if(!err){document.getElementById("setCrowdsaleStageResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result </a>"}});
 	});
+
+	if(hasEnded == "true"){
+		$("#distributeFunds").on('click', function(){
+			var forTeamFunds = $("#forTeamFunds").val();
+			var forEcosystemFunds = $("#forEcosystemFunds").val();
+			var forBoundAndAirdropFunds = $("#forBoundAndAirdropFunds").val();
+			//console.log(forTeamFunds);
+			//console.log(forEcosystemFunds);
+			//console.log(forBoundAndAirdropFunds);
+			token.finish(forTeamFunds,forEcosystemFunds,forBoundAndAirdropFunds, transactionPrice, function(err,res){if(!err){document.getElementById("distributeFundsResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result for distributed funds!!!</a>"}})
+			isFundsAreDistributed = true;
+		});
+	}else{
+		$("#distributeFunds").addClass("disabled");
+		$("#forTeamFunds").attr("disabled","");
+		$("#forEcosystemFunds").attr("disabled","");
+		$("#forBoundAndAirdropFunds").attr("disabled","");
+
+	};
+	
+	//transfer the ownership
+	$("#newOwnershipButton").on('click', function(){
+		var newOwnership = $("#newOwnership").val();
+		//console.log(selectedStage)
+		token.newOwner(newOwnership, transactionPrice, function(err, res){if(!err){document.getElementById("newOwnershipResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result </a>"}});
+	});
+
+	if(hasEnded == "true" && isFundsAreDistributed == true){
+		$("#finalizedButton").on('click',function(){
+			token.finalize(transactionPrice, function(err, res){if(!err){document.getElementById("finalizedResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result </a>"}});
+		});
+	}else{
+		$("#finalizedButton").addClass("disabled");
+	}
+	
+	$("#extendEndTimeButton").on('click', function(){
+		var extendEndTime = $("#extendEndTime").val();
+		var endDate = new Date(extendEndTime);
+		var newEndTime = endDate.getTime() / 1000;
+		token.extendEndTime(newEndTime, transactionPrice, function(err, res){
+			if(!err){
+				document.getElementById("extendEndTimeResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result </a>"
+			}
+		})
+	});
+
+
+	$("#buyTokensButton").on('click', function(){
+		var buyerAddress = $("#buyerAddress").val();
+		var ethAmount = $("#ethAmount").val();
+		//console.log(selectedStage)
+		token.buyTokens(buyerAddress, {value:web3.toWei(ethAmount.toString(),"ether"), gas:900000, gasPrice:web3.toWei("1","gwei")}, function(err, res){if(!err){document.getElementById("buyTokensResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result </a>"}});
+	});
+
+
+	if(isFinalized == "true" && goalReached == "false"){
+		$("#claimRefund").on('click', function(){
+			token.claimRefund(transactionPrice, function(error, result){
+				if(error){
+					console.log(error)
+				}else{
+					document.getElementById("weiRaisedResult").innerHTML = result.toString()
+				}
+			});
+		})
+	}else{
+			$("#claimRefund").addClass("disabled");
+		}
+
+
 
 
 

@@ -39,6 +39,8 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
    //hold the current rate
    uint256 public previousRate;
 
+   
+
 
   // Events
   event EthTransferred(string text);
@@ -73,7 +75,7 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
 
 
 
-     ) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
+     ) CappedCrowdsale(valueInWei(_cap)) FinalizableCrowdsale() RefundableCrowdsale(valueInWei(_goal)) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
       require(_goal <= _cap);
 
       maxTokens = valueInWei(_maxTokens);
@@ -175,7 +177,7 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
   // =========================
   function () external payable {
       uint256 tokensThatWillBeMintedAfterPurchase = msg.value.mul(rate);
-      if ((stage == CrowdsaleStage.PreICO) && (token.totalSupply() + tokensThatWillBeMintedAfterPurchase > totalTokensForSaleDuringPreICO)) {
+      if ((stage == CrowdsaleStage.PreICO) || (stage == CrowdsaleStage.SecondBonus) || (stage == CrowdsaleStage.ThirdBonus) || (stage == CrowdsaleStage.FinalBonus) && (token.totalSupply() + tokensThatWillBeMintedAfterPurchase > totalTokensForSaleDuringPreICO)) {
         msg.sender.transfer(msg.value); // Refund them
         EthRefunded("PreICO Limit Hit");
         return;
@@ -183,7 +185,7 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
 
       buyTokens(msg.sender);
 
-      if (stage == CrowdsaleStage.PreICO) {
+      if ((stage == CrowdsaleStage.PreICO) || (stage == CrowdsaleStage.SecondBonus) || (stage == CrowdsaleStage.ThirdBonus) || (stage == CrowdsaleStage.FinalBonus)) {
           totalWeiRaisedDuringPreICO = totalWeiRaisedDuringPreICO.add(msg.value);
       }
   }

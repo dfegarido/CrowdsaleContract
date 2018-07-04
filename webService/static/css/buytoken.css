@@ -1,0 +1,20 @@
+body {
+    color: #4e4e4e;
+    background: url("../../sitePage/assets/images/background/cryptobg1.jpeg")  no-repeat fixed center;
+    background-size:cover;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+div#overlay{
+    background: linear-gradient(#000000d9, #ff000000, #000000f0);
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    position:fixed;
+}
+.panel{
+        background-color: #00000054;
+        color:#bcd8f7f0;
+}

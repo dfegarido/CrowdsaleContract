@@ -7,9 +7,9 @@ module.exports = function(deployer) {
     startTime, 
     endTime,
     100, //token rate per ETH
-    "0x1F766dB9226D0f0ab6c0E51BE057C0FA85B1C106", // Replace this wallet address with the last one (10th account) from Ganache UI. This will be treated as the beneficiary address. 
-    20000000000000000000, // 20 ETH
-    500000000000000000000, // 500 ETH
+    "0x8dF06Ff3C9505Ef56Fb739B909e7f67fF7c9D2dB", // Replace this wallet address. This will be treated as the beneficiary address. 
+    20, // 20 ETH
+    50, // 50 ETH
     100000, // max token
     [10000, // distribute token for ecosystem
     10000, // distribute token for team

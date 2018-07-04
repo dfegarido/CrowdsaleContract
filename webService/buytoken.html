@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap Sign in Form with Avatar Icon</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<style type="text/css">
+    body {
+        color: #4e4e4e;
+        background: url("sitePage/assets/images/background/cryptobg1.jpeg")  no-repeat fixed center;
+        background-size:cover;
+        font-family: 'Roboto', sans-serif;
+    }
+
+  /*  .panel{
+        margin-top:250px;
+    }
+    */
+
+    div#overlay{
+        background: linear-gradient(#000000d9, #ff000000, #000000f0);
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        position:fixed;
+    }
+    .panel{
+            background-color: #00000054;
+            color:#bcd8f7f0;
+    }
+</style>
+</head>
+<body>
+<div id=overlay></div>
+
+<div class="container">
+    <br />
+    <br />
+    <br />
+    <div class="panel">
+
+        <div class="panel panel-body">
+            <div class="row ">
+                <div class="col-lg-4 col-md-4 hidden-sm"></div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <img class="img img-responsive " src="sitePage/assets/images/VPNCASH-logo-png.png" />
+                </div>
+                <div class="col-lg-4 col-md-4 hidden-sm"></div>
+              
+              <div class="col-lg-12 col-md-12 col-sm-12 ">
+                <h1 id="tokenRate"></h1>
+                
+              </div><!-- /.col-lg-6 -->
+              
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <h3  style="word-wrap: break-word;"><strong>Your Wallet Address :</strong> <i id="buyerAddress"></i></h3>
+                <h3  style="word-wrap: break-word;"><strong>Your Wallet Balance :</strong> <i id="buyerBalance"></i></h3>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="ethAmount" placeholder="ETH Amount">
+                  <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" id="ethButton">Buy Token &nbsp; <i class="fa fa-arrow-right"></i></button>
+                  </span>
+                  
+                </div><!-- /input-group -->
+                <h3 id="buyerCheckTransaction">Check The Transaction : </h3>
+                <div id="warning" class="alert alert-danger ">
+                  <strong>Warning!</strong> You must have a minimum of 1 ETH to buy a token !!!.
+                </div>
+              </div><!-- /.col-lg-6 -->
+
+               <!-- <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <h1>OR</h1>
+               </div>
+
+               <div class="col-lg-12 col-md-12 col-sm-12">
+                <h3 style="word-wrap: break-word;">Send to this Address : 0x8dF06Ff3C9505Ef56Fb739B909e7f67fF7c9D2dB</h3>
+                <div class="input-group">
+                  <input type="text" class="form-control"  placeholder="Transaction Hash">
+                  <span class="input-group-btn">
+                    <button class="btn btn-success" type="button">Verify Transaction &nbsp;<i class="fa fa-arrow-right" ></i></button>
+                  </span>
+                </div>
+              </div> -->
+
+            </div><!-- /.row -->
+        </div>
+        
+
+    <!-- <div class="form-footer"><a href="#">Forgot Your Password?</a></div> -->
+    </div>
+</div>
+
+<div class="text-center">
+    <a href="/" class="btn btn-success btn-lg"><i class="fa fa-arrow-left"></i> &nbsp; Back to CrowdSale</a>
+</div>
+
+
+<script type="text/javascript">
+    if (typeof web3 !== 'undefined') {
+            // Mist, Metamask
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // set the provider you want from Web3.providers
+            console.log("not connected on Metamask");
+        }
+
+        var contractAddress = "0xb490648c08ef0c742d50a1077e26d8fe0051daf5";      
+
+        /*
+        web3.eth.getBalance(web3.eth.defaultAccount, function(error, result){
+            if(error){
+                console.log(error)
+            }else{
+                document.getElementById("demo").innerText = web3.fromWei(result.toNumber());
+            }
+
+        });
+        */
+
+        var tokenContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"_rate","type":"uint256"}],"name":"setCurrentRate","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"endTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"cap","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"goal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"finalize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"tokensForEcosystem","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalTokensForSale","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"startTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"goalReached","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_teamFund","type":"address"},{"name":"_ecosystemFund","type":"address"},{"name":"_bountyFund","type":"address"}],"name":"finish","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_endTime","type":"uint256"}],"name":"extendEndTime","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"isFinalized","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"tokensForBountyAndAirDrop","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"value","type":"uint256"}],"name":"setCrowdsaleStage","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalWeiRaisedDuringPreICO","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"claimRefund","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalTokensForSaleDuringPreICO","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"stage","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maxTokens","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"hasEnded","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"vault","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"tokensForTeam","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_startTime","type":"uint256"},{"name":"_endTime","type":"uint256"},{"name":"_rate","type":"uint256"},{"name":"_wallet","type":"address"},{"name":"_goal","type":"uint256"},{"name":"_cap","type":"uint256"},{"name":"_maxTokens","type":"uint256"},{"name":"_forDistribution","type":"uint256[5]"},{"name":"_forBonus","type":"uint256[4]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"text","type":"string"}],"name":"EthTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"text","type":"string"}],"name":"EthRefunded","type":"event"},{"anonymous":false,"inputs":[],"name":"Finalized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"}]);
+
+
+        var token = tokenContract.at(contractAddress);
+        
+        var buyerAddress = web3.eth.accounts[0];
+        document.getElementById("buyerAddress").innerText = buyerAddress;
+
+        web3.eth.getBalance(buyerAddress, function(e,r){
+            if(!e){
+                var buyerBalance = r.toNumber() / 10**18;
+                document.getElementById("buyerBalance").innerText = buyerBalance;
+                if(buyerBalance < 1){
+                    document.getElementById("ethButton").disabled = true;
+                    document.getElementById("ethAmount").disabled = true;
+                }else{
+                    $("#warning").addClass("hidden")
+                }
+            }
+        });
+
+        token.rate(function(e,r){
+            document.getElementById("tokenRate").innerText = "1 ETH = " + r.toNumber()
+        });
+
+
+
+        $("#ethButton").on("click",function(){
+            var ethAmount = $("#ethAmount").val();
+            var trx = {from:web3.eth.accounts[0],value:web3.toWei(ethAmount,"ether"), gas:900000, gasPrice:web3.toWei("1","gwei")};
+            token.buyTokens(ethAmount,trx, function(e,r){
+                if(!e){
+                    var transactionHash = r.toString();
+                    var url = 'https://ropsten.etherscan.io/tx/' + transactionHash;
+                    document.getElementById("buyerCheckTransaction").innerHTML = "Check The Transaction : <a href='" + url + "'>"+transactionHash+"</a>"
+
+                    
+                }
+            });
+        });
+        
+
+
+</script>
+
+</body>
+</html>                            

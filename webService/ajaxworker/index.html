@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Movies</title>
+</head>
+
+
+
+<body>
+    <center>
+        <div id="tfheader">
+
+                <button type="button" id="tfbutton">Submit</button>
+        </div>
+     </center>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+
+$("#tfbutton").on('click',function(){
+	var data = {
+				  "query":"query($username:String!,$password:String!){auth(username:$username,password:$password)}",
+				  "variables":{
+					    "username":"crowdsaleAdmin",
+					    "password":"7634HJa"
+					  }
+				}
+    $.ajax({
+    	url: "https://api.vpncash.org/", 
+    	contentType:"application/json",
+    	data:JSON.stringify(data),
+    	type:"post",
+    	success: function(result,status, xhr){
+			        console.log(result.data.auth)
+			    },
+		error: function(x, s, e){
+					console.log(x.status, s)
+				}
+
+	});
+});
+</script>
+</body>
+
+</html>

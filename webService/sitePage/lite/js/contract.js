@@ -9,7 +9,7 @@ if (typeof web3 !== 'undefined') {
 
     var myWallet = web3.eth.accounts[0];
     web3.eth.defaultAccount = myWallet;
-    var contractAddress = "0xbbcbc62ab888c2fdc52875ccb0ba8aff617c4d13";
+    var contractAddress = "0x5590186fa6ed9bd789b5425bf282eb9f107f0149";
 
     var abi = 
     [ {

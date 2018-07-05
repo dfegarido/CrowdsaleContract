@@ -1,6 +1,21 @@
 
 var buyerAddress = web3.eth.accounts[0];
 var rate;
+var hasEnded = "false";
+
+function checkIfCrowdSaleHasEnded(){
+    token.hasEnded(function(e,r){
+        hasEnded = r.toString()
+        console.log(hasEnded)
+    });
+    if(hasEnded == "false"){
+        return false
+    }else{
+        window.location.replace("/")
+    }
+};
+setInterval(checkIfCrowdSaleHasEnded, 500)
+
 
 
 document.getElementById("buyerAddress").innerText = buyerAddress;

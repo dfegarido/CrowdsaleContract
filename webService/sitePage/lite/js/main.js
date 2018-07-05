@@ -86,9 +86,11 @@
                 console.log(error)
             }else{
                 document.getElementById("goalReachedBtn").innerHTML = result.toString();
-                $("#goalReachedBtn").removeClass("btn-danger");
-                $("#goalReachedBtn").addClass("btn-success");
                 goalReached = result.toString();
+                if(goalReached == "true"){
+                    $("#goalReachedBtn").removeClass("btn-danger");
+                    $("#goalReachedBtn").addClass("btn-success");
+                }
             }
         });
 
@@ -99,8 +101,10 @@
             }else{
                 document.getElementById("crowdSaleBtn").innerHTML = result.toString();
                 hasEnded = result.toString();
-                $("#crowdSaleBtn").removeClass("btn-danger");
-                $("#crowdSaleBtn").addClass("btn-success");
+                if(goalReached == "true"){
+                    $("#crowdSaleBtn").removeClass("btn-danger");
+                    $("#crowdSaleBtn").addClass("btn-success");
+                }
             }
         });
 
@@ -110,8 +114,10 @@
             }else{
                 document.getElementById("isFinalizedBtn").innerHTML = result.toString();
                 isFinalized = result.toString();
-                $("#isFinalizedBtn").removeClass("btn-danger");
-                $("#isFinalizedBtn").addClass("btn-success");
+                if(goalReached == "true"){
+                    $("#isFinalizedBtn").removeClass("btn-danger");
+                    $("#isFinalizedBtn").addClass("btn-success");
+                }
             }
         });
 
@@ -147,78 +153,6 @@
             }
         }); 
     });
-
-   
-
-    // $("#owner").on('click', function(){
-    //     token.owner(function(err,res){if(!err){document.getElementById("ownerResult").innerText = res.toString()}})
-    // });
-
-    
-    // $("#stage").on('click', function(){
-    //     token.stage(function(error, result){
-    //         if(error){
-    //             console.log(error)
-    //         }else{
-                
-    //             if(result.toNumber() == 0){
-    //                 document.getElementById("stageResult").innerHTML = "Pre ICO";
-    //             }else if(result.toNumber() == 1){
-    //                 document.getElementById("stageResult").innerHTML = "Second Stage";
-    //             }else if(result.toNumber() == 2){
-    //                 document.getElementById("stageResult").innerHTML = "Third Stage";
-    //             }else if(result.toNumber() == 3){
-    //                 document.getElementById("stageResult").innerHTML = "Final Stage";
-    //             }
-    //         }
-    //     });
-    // });
-
-    // $("#token").on('click', function(){
-    //     token.token(function(error, result){
-    //         if(error){console.log(error)}else{document.getElementById("tokenResult").innerHTML = result.toString()}
-    //     });
-    // });
-
-    // $("#tokensForBountyAndAirDrop").on('click', function(){
-    //     token.tokensForBountyAndAirDrop(function(error, result){
-    //         if(error){console.log(error)}else{document.getElementById("tokensForBountyAndAirDropResult").innerHTML = result.toString()}
-    //     });
-    // });
-
-    // $("#tokensForEcosystem").on('click', function(){
-    //     token.tokensForEcosystem(function(error, result){
-    //         if(error){console.log(error)}else{document.getElementById("tokensForEcosystemResult").innerHTML = result.toString()}
-    //     });
-    // });
-
-    // $("#tokensForTeam").on('click', function(){
-    //     token.tokensForTeam(function(error, result){
-    //         if(error){console.log(error)}else{document.getElementById("tokensForTeamResult").innerHTML = result.toString()}
-    //     });
-    // });
-
-    // $("#totalTokensForSale").on('click', function(){
-    //     token.totalTokensForSale(function(error, result){
-    //         if(error){console.log(error)}else{document.getElementById("totalTokensForSaleResult").innerHTML = result.toString()}
-    //     });
-    // });
-
-
-
-    // $("#totalTokensForSaleDuringPreICO").on('click', function(){
-    //     token.totalTokensForSaleDuringPreICO(function(error, result){
-    //         if(error){console.log(error)}else{document.getElementById("totalTokensForSaleDuringPreICOResult").innerHTML = result.toString()}
-    //     });
-    // });
-
-    // $("#wallet").on('click', function(){
-    //     token.wallet(function(error, result){
-    //         if(error){console.log(error)}else{document.getElementById("walletResult").innerHTML = result.toString()}
-    //     });
-    // });
-
-
 
 
 $(window).on("load", function(){
@@ -351,6 +285,9 @@ function pieCharts(){
     });
 }
 setTimeout(pieCharts, 1000)
+
+
+
 
 
 

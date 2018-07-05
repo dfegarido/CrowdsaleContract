@@ -2,6 +2,7 @@ var endDate;
 var hardCap;
 var currentWei;
 var goal;
+var hasEnded = "false";
 
 // Skills Progress Bar
 function testing() {
@@ -92,6 +93,26 @@ token.weiRaised(function(e,r){
 	currentWei = r.toNumber() / 10**18
 
 });
+
+token.hasEnded(function(e,r){
+	if(!e){
+		hasEnded = r.toString()
+		
+	}
+});
+
+
+function checkIfCrowdsaleIsEnded(){
+	// console.log(hasEnded)
+	if(hasEnded == "false"){
+		$("#buyToken").removeClass("disabled")
+	}else{
+		$("#buyToken").addClass("disabled")
+		document.getElementById("buyToken").innerText = "Crowdsale Has Finished !!!";
+	}
+}
+setTimeout(checkIfCrowdsaleIsEnded, 1000)
+
 
 		
 

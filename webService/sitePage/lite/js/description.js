@@ -140,22 +140,6 @@
         });
     });
 
-    function checkIfFinalized(){
-       if(hasEnded == "true"){
-            document.getElementById("finalizedButton").disabled = false;
-            $("#finalizedButton").on('click',function(){
-                token.finalize(transactionPrice, function(err, res){if(!err){document.getElementById("finalizedResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result </a>"}});
-            });
-        }else{
-            document.getElementById("finalizedButton").disabled = true;
-        } 
-    }
-    setTimeout(checkIfFinalized, 1000)
-
-    
-    
-
-
 
     $("#extendEndTimeButton").on('click', function(){
         var extendEndTime = $("#extendEndTime").val();
@@ -168,32 +152,6 @@
             }
         })
     });
-
-
-
-
-    $("#buyTokensButton").on('click', function(){
-        var buyerAddress = $("#buyerAddress").val();
-        var ethAmount = $("#ethAmount").val();
-        //console.log(selectedStage)
-        token.buyTokens(buyerAddress, {value:web3.toWei(ethAmount.toString(),"ether"), gas:900000, gasPrice:web3.toWei("1","gwei")}, function(err, res){if(!err){document.getElementById("buyTokensResult").innerHTML = "<a href=https://ropsten.etherscan.io/tx/" + res + "> Success, Check the Transaction Result </a>"}});
-    });
-
-
-    if(isFinalized == "true" && goalReached == "false"){
-        $("#claimRefund").on('click', function(){
-            token.claimRefund(transactionPrice, function(error, result){
-                if(error){
-                    console.log(error)
-                }else{
-                    document.getElementById("weiRaisedResult").innerHTML = result.toString()
-                }
-            });
-        })
-    }else{
-            $("#claimRefund").addClass("disabled");
-        }
-
 
 
 

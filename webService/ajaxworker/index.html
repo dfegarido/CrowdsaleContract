@@ -11,14 +11,17 @@
         <div id="tfheader">
 
                 <button type="button" id="tfbutton">Submit</button>
+                <button type="button" id="tfbutton" onclick="save()">save</button>
         </div>
      </center>
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jwt-decode.js"></script>
 <script>
 
-$("#tfbutton").on('click',function(){
+
+$(window).on('load',function(){
 	var data = {
 				  "query":"query($username:String!,$password:String!){auth(username:$username,password:$password)}",
 				  "variables":{
@@ -26,13 +29,30 @@ $("#tfbutton").on('click',function(){
 					    "password":"7634HJa"
 					  }
 				}
+
+
+	const hel ={
+			  "query":"query{getCrowdsale{hardcap,end_t,start_t,goal_total,goal_reached,goal_ended,goal_finalized,token_max,token_address,token_airdrop,token_company,token_team,token_sale,token_preICO,wallet,rate,stage,fund_raised}}"
+			}
+
+	const save = {
+	"query":"mutation{crowdsale(hardcap:\"dency\",end_t:\"sample_one\",start_t:\"sample_one\",goal_total:\"sample_one\",goal_reached:false,goal_ended:false,goal_finalized:false,token_max:\"sample_one\",token_address:\"sample_one\",token_airdrop:\"sample_one\",token_company:\"sample_one\",token_team:\"sample_one\",token_sale:\"sample_one\",token_preICO:\"sample_one\",wallet:\"sample_one\",rate:\"sample_one\",stage:\"sample_one\",fund_raised:\"sample_one\")}"
+	}
+
     $.ajax({
-    	url: "https://api.vpncash.org/", 
-    	contentType:"application/json",
+    	url: "https://api.vpncash.org/",
+    	headers: { 
+    		'content-type': "application/json",
+    		'authorization': window.localStorage.getItem('session'),
+    	},
     	data:JSON.stringify(data),
     	type:"post",
     	success: function(result,status, xhr){
-			        console.log(result.data.auth)
+			        encoderesult = result.data.auth;
+			        window.localStorage.setItem('session',encoderesult)
+			        // console.log(encoderesult)
+			        // // decode = jwt_decode(encoderesult);
+			        // // console.log(decode);
 			    },
 		error: function(x, s, e){
 					console.log(x.status, s)

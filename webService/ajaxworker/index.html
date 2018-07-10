@@ -11,7 +11,8 @@
         <div id="tfheader">
 
                 <button type="button" id="tfbutton">Submit</button>
-                <button type="button" id="tfbutton" onclick="save()">save</button>
+                <button type="button" id="send">Send</button>
+                <button type="button" id="getItem">Get Item</button>
         </div>
      </center>
 
@@ -35,15 +36,20 @@ $(window).on('load',function(){
 			  "query":"query{getCrowdsale{hardcap,end_t,start_t,goal_total,goal_reached,goal_ended,goal_finalized,token_max,token_address,token_airdrop,token_company,token_team,token_sale,token_preICO,wallet,rate,stage,fund_raised}}"
 			}
 
+	const progress ={
+			  "query":"query{getCrowdsale{hardcap,fund_raised}}"
+			}
+
+
 	const save = {
-	"query":"mutation{crowdsale(hardcap:\"dency\",end_t:\"sample_one\",start_t:\"sample_one\",goal_total:\"sample_one\",goal_reached:false,goal_ended:false,goal_finalized:false,token_max:\"sample_one\",token_address:\"sample_one\",token_airdrop:\"sample_one\",token_company:\"sample_one\",token_team:\"sample_one\",token_sale:\"sample_one\",token_preICO:\"sample_one\",wallet:\"sample_one\",rate:\"sample_one\",stage:\"sample_one\",fund_raised:\"sample_one\")}"
+	"query":"mutation{crowdsale(hardcap:\"50\",end_t:\"1535904000\",start_t:\"1531115387\",goal_total:\"20\",goal_reached:false,goal_ended:false,goal_finalized:false,token_max:\"100000\",token_address:\"0x85cc8ddb2f9817ea4e7b7a72f8edb111ddd0490b\",token_airdrop:\"50\",token_company:\"30\",token_team:\"10\",token_sale:\"20\",token_preICO:\"60\",wallet:\" 0x92341bbb207388f75b7680670bfd584e6ecb03de\",rate:\"100\",stage:\"PreICO\",fund_raised:\"25\")}"
 	}
 
+
     $.ajax({
-    	url: "https://api.vpncash.org/",
+    	url: "https://api.vpncash.org/query/",
     	headers: { 
-    		'content-type': "application/json",
-    		'authorization': window.localStorage.getItem('session'),
+    		'content-type': "application/json"
     	},
     	data:JSON.stringify(data),
     	type:"post",
@@ -51,14 +57,63 @@ $(window).on('load',function(){
 			        encoderesult = result.data.auth;
 			        window.localStorage.setItem('session',encoderesult)
 			        // console.log(encoderesult)
-			        // // decode = jwt_decode(encoderesult);
-			        // // console.log(decode);
+			        // decode = jwt_decode(encoderesult);
+			        // console.log(decode);
 			    },
 		error: function(x, s, e){
 					console.log(x.status, s)
 				}
 
 	});
+
+
+
+
+    $("#send").on("click",function(){
+    	$.ajax({
+	    	url: "https://api.vpncash.org/query/",
+	    	headers: { 
+	    		'content-type': "application/json",
+	    		"authorization":window.localStorage.getItem('session')
+	    		
+	    	},
+	    	data:JSON.stringify(save),
+	    	type:"post",
+	    	success: function(result,status, xhr){
+						console.log(result.data.crowdsale);
+		
+				    },
+			error: function(x, s, e){
+						console.log(x.status, s)
+					}
+
+		});
+    });
+
+    $("#getItem").on("click",function(){
+    	$.ajax({
+	    	url: "https://api.vpncash.org/query/",
+	    	headers: { 
+	    		'content-type': "application/json",
+	    	},
+	    	data:JSON.stringify(progress),
+	    	type:"post",
+	    	success: function(result,status, xhr){
+						const getData = result.data.getCrowdsale
+						console.log(getData);
+
+				    },
+			error: function(x, s, e){
+						console.log(x.status, s)
+					}
+
+		});
+    });
+
+
+
+
+
 });
 </script>
 </body>

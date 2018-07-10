@@ -1,54 +1,56 @@
-var endDate;
-var hardCap;
-var currentWei;
-var goal;
-var hasEnded = "false";
 
-// Skills Progress Bar
-function testing() {
-  $('.progress-bar').each(function() {
-    // var bar_value = $(this).attr('aria-valuenow') + '%';   
-    // console.log(bar_value)             
-    $(this).animate({ width: _percentage(currentWei) + "%" }, { duration: 1000, easing: 'easeOutCirc' });
-    document.getElementById("progress").innerText = _percentage(currentWei) + " %" ;
-  });
-  document.getElementById("currentETH").innerText = currentWei + " ETH"
-  document.getElementById("goal").innerText = goal + " ETH"
-  document.getElementById("hardCap").innerText = hardCap + " ETH"
-  document.getElementById("icoDate").innerText = new Date(endDate).toDateString()
+// {"hardcap":"50",
+// "end_t":"1535904000",
+// "start_t":"1531115387",
+// "goal_total":"50",
+// "goal_reached":false,
+// "goal_ended":false,
+// "goal_finalized":null,
+// "token_max":"100000",
+// "token_address":"0x85cc8ddb2f9817ea4e7b7a72f8edb111ddd0490b",
+// "token_airdrop":"50",
+// "token_company":"30",
+// "token_team":"10",
+// "token_sale":"20",
+// "token_preICO":"60",
+// "wallet":"0x42e754186C1b7e16b5E1A5e994AB8D4482F5A6f3",
+// "rate":"100",
+// "stage":"PreICO",
+// "fund_raised":"25"}
+var getData;
 
-  // console.log(_percentage(currentWei))
-
-};
-setTimeout(testing, 1500);
-
-function _percentage(_value){
-	return (_value / hardCap) * 100;
-
-}
-
-token.rate(function(e,r){
-	if(!e){
-		document.getElementById("rate").innerHTML = "1 ETH = " + r.toNumber() + " VPN"
+const qry ={
+	  "query":"query{getCrowdsale{hardcap,end_t,start_t,goal_total,goal_reached,goal_ended,goal_finalized,token_max,token_address,token_airdrop,token_company,token_team,token_sale,token_preICO,wallet,rate,stage,fund_raised}}"
 	}
+$.ajax({
+	url: "https://api.vpncash.org/query/",
+	headers: { 
+		'content-type': "application/json",
+	},
+	data:JSON.stringify(qry),
+	type:"post",
+	success: function(result,status, xhr){
+				getData = result.data.getCrowdsale
+				// console.log(getData);
+				countDown(getData.end_t);
+				progressBar(
+					getData.fund_raised,
+				 	getData.end_t,
+				 	getData.hardcap,
+				 	getData.goal_total,
+				 	getData.rate
+				 	);
+		    },
+	error: function(x, s, e){
+				console.log(x.status, s)
+			}
 });
 
-token.endTime(function(e,r){
-	if(!e){
-		endDate = r.toNumber() * 1000
-	}
-});
 
-token.goal(function(e,r){
-	if(!e){
-		goal = r.toNumber() / 10**18;
-	}
-});
 
-function countDown(){
+function countDown(dataValue){
 	// Set the date we're counting down to
-	var countDownDate = endDate;
-	// console.log(endDate)
+	var countDownDate = dataValue * 1000;
 
 	// Update the count down every 1 second
 	var x = setInterval(function() {
@@ -76,43 +78,36 @@ function countDown(){
 	    // If the count down is over, write some text 
 	    if (distance < 0) {
 	        clearInterval(x);
-	        document.getElementById("countdownTimer").innerHTML = "EXPIRED";
+	        console.log("Expired");
 
 	    }
 	}, 1000);
 }
-setTimeout(countDown, 1000);
-
-token.cap(function(e,r){
-	if(!e){
-		hardCap = r.toNumber() / 10**18;
-	}
-});
-
-token.weiRaised(function(e,r){
-	currentWei = r.toNumber() / 10**18
-
-});
-
-token.hasEnded(function(e,r){
-	if(!e){
-		hasEnded = r.toString()
-		
-	}
-});
 
 
-function checkIfCrowdsaleIsEnded(){
-	// console.log(hasEnded)
-	if(hasEnded == "false"){
-		$("#buyToken").removeClass("disabled")
-	}else{
-		$("#buyToken").addClass("disabled")
-		document.getElementById("buyToken").innerText = "Crowdsale Has Finished !!!";
-	}
+function progressBar(currentWei, endDate, hardcap, goal, rate) {
+  $('.progress-bar').each(function() {
+    // var bar_value = $(this).attr('aria-valuenow') + '%';   
+    // console.log(bar_value)             
+    $(this).animate({ width: _percentage(parseInt(currentWei), parseInt(hardcap)) + "%" }, { duration: 1000, easing: 'easeOutCirc' });
+    document.getElementById("progress").innerText = _percentage(parseInt(currentWei), parseInt(hardcap)) + " %" ;
+  });
+  document.getElementById("currentETH").innerText = currentWei + " ETH"
+  document.getElementById("goal").innerText = goal + " ETH"
+  document.getElementById("hardCap").innerText = hardcap + " ETH"
+  document.getElementById("icoDate").innerText = new Date(endDate * 1000).toDateString()
+  document.getElementById("rate").innerHTML = "1 ETH = " + rate + " VPN"
+};
+
+
+function _percentage(_value, _hardcap){
+	return (_value / _hardcap) * 100;
+
 }
-setTimeout(checkIfCrowdsaleIsEnded, 1000)
 
 
-		
+
+	
+
+
 

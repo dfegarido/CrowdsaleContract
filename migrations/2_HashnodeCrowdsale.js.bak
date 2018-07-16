@@ -1,0 +1,25 @@
+var HashnodeCrowdsale = artifacts.require("./HashnodeCrowdsale.sol");
+
+module.exports = function(deployer) {
+  const startTime = Math.round((new Date(Date.now() - 86400000).getTime())/1000); // Yesterday
+  const endTime = Math.round((new Date().getTime() + (86400000 * 30))/1000); // Today + 20 days
+  deployer.deploy(HashnodeCrowdsale, 
+    startTime, 
+    endTime,
+    5, //token rate per ETH
+    // "0x32442976f2703466ca5eDc0222ae72A77FC353aE", // Replace this wallet address. This will be treated as the beneficiary address. 
+    "0x1F766dB9226D0f0ab6c0E51BE057C0FA85B1C106", // Replace this wallet address. This will be treated as the beneficiary address. 
+    20, // 30 ETH
+    50, // 50 ETH
+    100, // max token
+    [10, // distribute token for ecosystem
+    10, // distribute token for team
+    30, // distribute token for bounty and airdrop
+    50, // distribute token for Sale
+    20], // distribute token and for during ICO
+    [40, // bonus rate on first stage
+    30, // bonus rate on second stage
+    20, // bonus rate on third stage
+    10] // bonus rate on final stage
+  );
+};

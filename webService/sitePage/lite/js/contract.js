@@ -1,8 +1,7 @@
 
     
 
-    var abi = 
-    [
+    var abi = [
     {
       "constant": true,
       "inputs": [],
@@ -302,20 +301,6 @@
       "type": "function"
     },
     {
-      "constant": true,
-      "inputs": [],
-      "name": "hasEnded",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "constant": false,
       "inputs": [
         {
@@ -528,16 +513,31 @@
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "hasEnded",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
     }
   ];
 
 var privateKey = "0xe1898dce8005b5e0a6f58659b56b4e95f28092b2f4d8f57bfc6762fa15a07e10";
-
-var contractAddress = "0x5590186fa6ed9bd789b5425bf282eb9f107f0149";
+// var privateKey = "0x7c0884b09b0707a2d8ac2876c9019c33d00ff7544fc257ec07306609f629127a";
+var contractAddress = "0x859909c71b435f5e7de63072e2849a57d2249103";
 
 var wallet = new ethers.Wallet(privateKey);
 
-wallet.provider = ethers.providers.getDefaultProvider('ropsten');
+wallet.provider = ethers.providers.getDefaultProvider('ropsten'); //for the ropsten network
+// wallet.provider = ethers.providers.getDefaultProvider(); //for the localnetwork network
 var token = new ethers.Contract(contractAddress, abi, wallet);
 
 
@@ -552,23 +552,23 @@ $("#logout").on("click", function(){
 // })
 
 $(window).on("load",function(){
-    $("#myModal").modal('show')
+    $("#myModal").modal('toggle')
 })
 
 
 
 
 
-x = 0
-y = 1
-function f(){
-  z = x + y;
-  console.log(z)
-  x = y
-  y = z 
-  //sleep time so we can follow the result
-  setTimeout(f, 1000)
-}
+// x = 0
+// y = 1
+// function f(){
+//   z = x + y;
+//   console.log(z)
+//   x = y
+//   y = z 
+//   //sleep time so we can follow the result
+//   setTimeout(f, 1000)
+// }
 
 
 

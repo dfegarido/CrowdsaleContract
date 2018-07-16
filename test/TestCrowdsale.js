@@ -25,7 +25,9 @@ contract('HashnodeCrowdsale', function(accounts) {
             const tokenAddress = await instance.token.call();
             const hashnodeToken = HashnodeToken.at(tokenAddress);
             const tokenAmount = await hashnodeToken.balanceOf(accounts[7]);
-            assert.equal(tokenAmount.toNumber(), 5000000000000000000, 'The sender didn\'t receive the tokens as per PreICO rate');
+            const rate = await instance.rate.call();
+            // console.log(web3.toWei(rate.toString(), 'ether'));
+            assert.equal(tokenAmount.toNumber(), Number(web3.toWei(rate.toString(), 'ether')), 'The sender didn\'t receive the tokens as per PreICO rate');
             done();
        });
     });
@@ -33,14 +35,14 @@ contract('HashnodeCrowdsale', function(accounts) {
     it('should transfer the ETH to wallet immediately in Pre ICO', function(done){
         HashnodeCrowdsale.deployed().then(async function(instance) {
             let balanceOfBeneficiary = await web3.eth.getBalance(accounts[9]);
-            balanceOfBeneficiary = Number(balanceOfBeneficiary.toString(10));
+            balanceOfBeneficiary = Number(balanceOfBeneficiary.toString());
 
             await instance.sendTransaction({ from: accounts[1], value: web3.toWei(2, "ether")});
 
             let newBalanceOfBeneficiary = await web3.eth.getBalance(accounts[9]);
-            newBalanceOfBeneficiary = Number(newBalanceOfBeneficiary.toString(10));
+            newBalanceOfBeneficiary = Number(newBalanceOfBeneficiary.toString());
 
-            assert.equal(newBalanceOfBeneficiary, balanceOfBeneficiary + 2000000000000000000, 'ETH couldn\'t be transferred to the beneficiary');
+            assert.equal(newBalanceOfBeneficiary, balanceOfBeneficiary + Number(web3.toWei(2, "ether")), 'ETH couldn\'t be transferred to the beneficiary');
             done();
        });
     });
@@ -62,13 +64,15 @@ contract('HashnodeCrowdsale', function(accounts) {
        });
     });
 
-    it('one ETH should buy 2 Hashnode Tokens in ICO', function(done){
+    it('one ETH should buy 100 VPN Tokens in ICO', function(done){
         HashnodeCrowdsale.deployed().then(async function(instance) {
             const data = await instance.sendTransaction({ from: accounts[2], value: web3.toWei(1.5, "ether")});
             const tokenAddress = await instance.token.call();
             const hashnodeToken = HashnodeToken.at(tokenAddress);
             const tokenAmount = await hashnodeToken.balanceOf(accounts[2]);
-            assert.equal(tokenAmount.toNumber(), 7500000000000000000, 'The sender didn\'t receive the tokens as per ICO rate');
+            const rate = await instance.rate.call()
+            const totalAmount = Number(rate) * web3.toWei(1.5, "ether");
+            assert.equal(tokenAmount.toNumber(), totalAmount, 'The sender didn\'t receive the tokens as per ICO rate');
             done();
        });
     });

@@ -3,7 +3,9 @@ pragma solidity ^0.4.18;
 import './HashnodeToken.sol';
 import '../node_modules/zeppelin-solidity/contracts/crowdsale/CappedCrowdsale.sol';
 import '../node_modules/zeppelin-solidity/contracts/crowdsale/RefundableCrowdsale.sol';
+
 contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
+
 
   // ICO Stage
   // ============
@@ -26,16 +28,18 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
   uint256 public totalWeiRaisedDuringPreICO;
   // ===================
 
-  // Bonuses variables
+
+    // Bonuses variables
   uint256 ratePreICOBonus;
   uint256 rateSecondRoundBonus;
   uint256 rateThirdRoundBonus;
   uint256 rateFinalRoundBonus;
   //=======================
 
-     //hold the current rate
+   //hold the current rate
    uint256 public previousRate;
 
+   
 
 
   // Events
@@ -46,22 +50,27 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
   // Constructor
   // ============
   function HashnodeCrowdsale(
-        uint256 _startTime,
-        uint256 _endTime, 
-        uint256 _rate, 
-        address _wallet, 
-        uint256 _goal, 
-        uint256 _cap,
+    uint256 _startTime, 
+    uint256 _endTime, 
+    uint256 _rate, 
+    address _wallet, 
+    uint256 _goal,
+     uint256 _cap,
 
-        // Total Supply
-        uint256 _maxTokens, // 100  
-        //Token Distribution
-        uint256[5] _forDistribution,
+    // Total Supply
+    uint256 _maxTokens, // 100  
+    //Token Distribution
+    uint256[5] _forDistribution,
+    
+    // uint256 _tokenForEcosystem, // ex 10
+    // uint256 _tokenForTeam, // ex 10
+    // uint256 _tokenForBountyAndAirdrop, // ex 30
+    // uint256 _totalTokenForSale, // ex 50
+    // uint256 _totalTokenForSaleDuringPreICO, //ex 20
 
-        //for Bunoses
-        uint256[4] _forBonus
+     uint256[4] _forBonus
 
-        ) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
+     ) CappedCrowdsale(valueInWei(_cap)) FinalizableCrowdsale() RefundableCrowdsale(valueInWei(_goal)) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
       require(_goal <= _cap);
 
       maxTokens = valueInWei(_maxTokens);
@@ -77,21 +86,23 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
       rateThirdRoundBonus = _forBonus[2]; // 20 percent +
       rateFinalRoundBonus = _forBonus[3]; // 10 percent +
 
-            /**/
+      /**/
       previousRate = _rate;
       setCrowdsaleStage(0);
-
-
   }
-  // =============
 
-  //====== Value in Wei =============//
+
+  // Value in Wei
   function valueInWei(uint256 _value) internal returns(uint256){
     
     return _value * 10 ** uint256(18);
   }
-  // =================================//
+  // =============
 
+
+
+
+  // =============
 
   // Token Deployment
   // =================
@@ -107,7 +118,6 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
   function setCrowdsaleStage(uint value) public onlyOwner {
 
       CrowdsaleStage _stage;
-
       uint256 bonusRate;
       if (uint(CrowdsaleStage.PreICO) == value) {
         _stage = CrowdsaleStage.PreICO;
@@ -122,6 +132,7 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
       }
 
       stage = _stage;
+
       if (stage == CrowdsaleStage.PreICO) {
         bonusRate = previousRate +  _percentageBonus(ratePreICOBonus);
         setCurrentRate(bonusRate);
@@ -141,11 +152,6 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
       } else if (stage == CrowdsaleStage.ICO) {
         setCurrentRate(previousRate);
       }
-      // if (stage == CrowdsaleStage.PreICO) {
-      //   setCurrentRate(5);
-      // } else if (stage == CrowdsaleStage.ICO) {
-      //   setCurrentRate(2);
-      // }
   }
 
   //Bonus rate 
@@ -166,7 +172,7 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
   // =========================
   function () external payable {
       uint256 tokensThatWillBeMintedAfterPurchase = msg.value.mul(rate);
-      if ((stage == CrowdsaleStage.PreICO) && (token.totalSupply() + tokensThatWillBeMintedAfterPurchase > totalTokensForSaleDuringPreICO)) {
+      if ((stage == CrowdsaleStage.PreICO) || (stage == CrowdsaleStage.SecondBonus) || (stage == CrowdsaleStage.ThirdBonus) || (stage == CrowdsaleStage.FinalBonus) && (token.totalSupply() + tokensThatWillBeMintedAfterPurchase > totalTokensForSaleDuringPreICO)) {
         msg.sender.transfer(msg.value); // Refund them
         EthRefunded("PreICO Limit Hit");
         return;
@@ -174,7 +180,7 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
 
       buyTokens(msg.sender);
 
-      if (stage == CrowdsaleStage.PreICO) {
+      if ((stage == CrowdsaleStage.PreICO) || (stage == CrowdsaleStage.SecondBonus) || (stage == CrowdsaleStage.ThirdBonus) || (stage == CrowdsaleStage.FinalBonus)) {
           totalWeiRaisedDuringPreICO = totalWeiRaisedDuringPreICO.add(msg.value);
       }
   }
@@ -213,7 +219,7 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
 
   // REMOVE THIS FUNCTION ONCE YOU ARE READY FOR PRODUCTION
   // USEFUL FOR TESTING `finish()` FUNCTION
-  function hasEnded() public view returns (bool) {
-    return true;
-  }
+  //function hasEnded() public view returns (bool) {
+  // return true;
+  //}
 }

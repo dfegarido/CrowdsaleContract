@@ -1,233 +1,160 @@
-
-    var hasEnded = "false";
-    var isFundsAreDistributed = false;
-    var isFinalized;
-    var goalReached;
-    var rate;
-    var transactionPrice = {from:web3.eth.accounts[0], gas:900000, gasPrice:web3.toWei("1","gwei")};
-    var currentWei;
-    var hardcap;
-    var maxTokens;
-    var forTeam;
-    var forCompany;
-    var forAirdrop;
-    var forSale;
-    var endTime;
-    
-  
-
-    $(function(){
-
-        token.endTime(function(error, result){
-            if(error){console.log(error)}else{endTime = result.toNumber()}
-        });
-
-        document.getElementById("contractAddress").innerHTML = '<h4>Contract Address : <a href="https://ropsten.etherscan.io/address/' +contractAddress+  '">' +contractAddress+  '</a></h4><hr/>';
-
-        // for current rate
-        token.rate(function(e,r){
-            if(!e){
-                document.getElementById('rate').innerHTML =  '1 ETH  =  '+ r.toNumber() +' VPN'
-            };
-        });
-
-        // for current stage
-        token.stage(function(error, result){
-            if(error){
-                console.log(error)
-            }else{
-                
-                if(result.toNumber() == 0){
-                    document.getElementById("stageResult").innerText = "Pre ICO";
-                }else if(result.toNumber() == 1){
-                    document.getElementById("stageResult").innerText = "Second Stage";
-                }else if(result.toNumber() == 2){
-                    document.getElementById("stageResult").innerText = "Third Stage";
-                }else if(result.toNumber() == 3){
-                    document.getElementById("stageResult").innerText = "Final Stage";
-                }else if(result.toNumber() == 4){
-                    document.getElementById("stageResult").innerText = "ICO";
-                }
-            }
-        });
-
-        token.cap(function(e, r){
-            if(!e){
-                document.getElementById("capresult").innerHTML = r.toNumber() / 10**18 + "  ETH";
-                document.getElementById("progressCap").innerHTML = " Maximum Cap : " + r.toNumber() / 10**18 + "  ETH";
-                hardcap = r.toNumber() / 10**18;
-            }
-        });
-
-        token.goal(function(error, result){
-            if(!error){
-                document.getElementById("goalResult").innerHTML = result.toString()/10**18 + " ETH ";
-                document.getElementById("progressGoal").innerHTML = "Goal : " + result.toString()/10**18 + " ETH ";
-            }
-        });
-
-
-        token.weiRaised(function(e,r){
-            if(!e){
-                document.getElementById("currentWei").innerText = r.toNumber() / 10**18 + "  ETH";
-                // $("#progressbar").attr("aria-valuenow",_progressBar(r.toNumber() / 10**18));
-                currentWei = r.toNumber() / 10**18;
-
-                // $("#progressbar").attr("aria-valuenow","36");
-                // document.getElementById("progress-val").innterText = _progressBar(r.toNumber() / 10**18);
-            }else{
-                console.log(e)
-            }
-        });
-
-        // is Goal Reached
-        token.goalReached(function(error, result){
-            if(error){
-                console.log(error)
-            }else{
-                document.getElementById("goalReachedBtn").innerHTML = result.toString();
-                goalReached = result.toString();
-                if(goalReached == "true"){
-                    $("#goalReachedBtn").removeClass("btn-danger");
-                    $("#goalReachedBtn").addClass("btn-success");
-                }
-            }
-        });
-
-        // crowdsale has ended?
-        token.hasEnded(function(error, result){
-            if(error){
-                console.log(error)
-            }else{
-                document.getElementById("crowdSaleBtn").innerHTML = result.toString();
-                hasEnded = result.toString();
-                if(goalReached == "true"){
-                    $("#crowdSaleBtn").removeClass("btn-danger");
-                    $("#crowdSaleBtn").addClass("btn-success");
-                }
-            }
-        });
-
-        token.isFinalized(function(error, result){
-            if(error){
-                console.log(error)
-            }else{
-                document.getElementById("isFinalizedBtn").innerHTML = result.toString();
-                isFinalized = result.toString();
-                if(goalReached == "true"){
-                    $("#isFinalizedBtn").removeClass("btn-danger");
-                    $("#isFinalizedBtn").addClass("btn-success");
-                }
-            }
-        });
-
-       
-        token.maxTokens(function(error, result){
-            if(!error){
-                maxTokens = Math.round(result.toNumber() / 10**18)
-            }
-            if(maxTokens){
-                token.tokensForTeam(function(e,r){
-                    if(!e){
-                        forTeam = ((r.toNumber() / 10**18) / maxTokens) * 100;
-                    }
-                });
-
-                token.tokensForBountyAndAirDrop(function(e,r){
-                    if(!e){
-                        forAirdrop = ((r.toNumber() / 10**18) / maxTokens) * 100;
-                    }
-                });
-
-                token.tokensForEcosystem(function(e,r){
-                    if(!e){
-                        forCompany = ((r.toNumber() / 10**18) / maxTokens) * 100;
-                    }
-                });
-
-                token.totalTokensForSale(function(e,r){
-                    if(!e){
-                        forSale = ((r.toNumber() / 10**18) / maxTokens) * 100;
-                    }
-                });
-            }
-        }); 
-    });
-
-
-$(window).on("load", function(){
-    function trigger(){
-        var countDownDate = endTime * 1000;
-        // console.log(countDownDate);
-
-         // Set the date we're counting down to
-        // var countDownDate = endTime * 1000;
-        
-
-        // Update the count down every 1 second
-        var x = setInterval(function() {
-
-            // Get todays date and time
-            var now = new Date().getTime();
-            
-            // Find the distance between now an the count down date
-            var distance = countDownDate - now;
-            
-            // Time calculations for days, hours, minutes and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Output the result in an element with id
-            document.getElementById("days").innerText = days;
-            document.getElementById("hours").innerText = hours;
-            document.getElementById("mins").innerText = minutes;
-            document.getElementById("secs").innerText = seconds;
-            
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("days").innerHTML = 0;
-                document.getElementById("hours").innerHTML = 0;
-                document.getElementById("mins").innerHTML = 0;
-                document.getElementById("secs").innerHTML = 0;
-            }
-        }, 1000);
-
-        //Main Sale Starts in:
-        var mainSaleICO = new Date(endTime*1000);
-        document.getElementById("mainSale").innerText = mainSaleICO.toDateString();
-
-        
-    }
-    setTimeout(trigger,1000)
-
+// Authentication
+$(window).on("load",function(){
+	try{
+		const decode = jwt_decode(localStorage.session)
+		if(decode.roles[0] != "isAuthenticated"){
+			window.localStorage.session = ""
+			window.location.href = "login.html"
+		}
+	}catch(e){
+		console.log(e)
+		window.localStorage.session = ""
+		window.location.href = "login.html"
+	}
+	
+	
 })
 
 
 
-// Skills Progress Bar
-function testing() {
-  $('.progress-bar').each(function() {
-    // var bar_value = $(this).attr('aria-valuenow') + '%';                
-    $(this).animate({ width: _progressBar(currentWei) + "%" }, { duration: 3000, easing: 'easeOutCirc' });
-    $(this).text(_progressBar(currentWei) + " %");
-    
-  });
 
-};
-setTimeout(testing, 1000);
+token.endTime().then(function(v){
+	countdown(v.toString())
+});
 
-//progress Bar function
-function _progressBar(_value){
-        //formula (value / hardcap) * 100
-        return (_value / hardcap) * 100
+
+let hardcap;
+let currentWei;
+let team;
+let company;
+let airdrop;
+let sale;
+
+token.isFinalized().then(function(v){
+	$("#isFinalizedBtn").html(v.toString())
+});
+
+token.goalReached().then(function(v){
+	$("#goalReachedBtn").html(v.toString())
+});
+
+token.hasEnded().then(function(v){
+	$("#crowdSaleBtn").html(v.toString())
+});
+
+token.rate().then(function(v){
+	$("#rate").html("1 ETH = " + v.toString() + " VPN")
+});
+
+token.stage().then(function(v){
+	const stage = ["PreICO","2nd Stage","3rd Stage","Final Stage"]
+	$("#stageResult").html(stage[v.toString()])
+});
+
+token.goal().then(function(v){
+	$("#goalResult").html(v.toString() / 10**18 + " ETH")
+});
+
+token.maxTokens().then(function(v){
+	$("#totalSupply").html(Math.round(v.toString() / 10**18).toLocaleString())
+})
+
+token.cap().then(function(v){
+	hardcap = v.toString()
+	$("#capresult").html(hardcap / 10**18 + " ETH")
+});
+
+token.weiRaised().then(function(v){
+	currentWei = v.toString()
+	$("#currentWei").html(currentWei + " ETH")
+});
+
+token.tokensForTeam().then(function(v){
+	team = v.toString()
+});
+token.tokensForEcosystem().then(function(v){
+	company = v.toString()
+})
+token.tokensForBountyAndAirDrop().then(function(v){
+	airdrop = v.toString()
+});
+token.totalTokensForSale().then(function(v){
+	sale = v.toString()
+});
+
+setTimeout(progressBar, 1000)
+setTimeout(pieCharts, 1000)
+
+
+
+
+
+
+function countdown(endTime){
+	var countDownDate = endTime * 1000;
+	// console.log(countDownDate);
+
+	 // Set the date we're counting down to
+	// var countDownDate = endTime * 1000;
+
+
+	// Update the count down every 1 second
+	var x = setInterval(function() {
+
+	    // Get todays date and time
+	    var now = new Date().getTime();
+	    
+	    // Find the distance between now an the count down date
+	    var distance = countDownDate - now;
+	    
+	    // Time calculations for days, hours, minutes and seconds
+	    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	    
+	    // Output the result in an element with id
+	    document.getElementById("days").innerText = days;
+	    document.getElementById("hours").innerText = hours;
+	    document.getElementById("mins").innerText = minutes;
+	    document.getElementById("secs").innerText = seconds;
+	    
+	    // If the count down is over, write some text 
+	    if (distance < 0) {
+	        clearInterval(x);
+	        document.getElementById("days").innerHTML = 0;
+	        document.getElementById("hours").innerHTML = 0;
+	        document.getElementById("mins").innerHTML = 0;
+	        document.getElementById("secs").innerHTML = 0;
+	    }
+	}, 1000);
+
+	//Main Sale Starts in:
+    var mainSaleICO = new Date(endTime*1000);
+    document.getElementById("mainSale").innerText = mainSaleICO.toDateString();
+
+}
+
+function progressBar(){
+	// console.log(currentWei, hardcap)
+	$('.progress-bar').each(function() {
+	    // var bar_value = $(this).attr('aria-valuenow') + '%';                
+	    $(this).animate({ width: _percentage(currentWei, hardcap) + "%" }, { duration: 3000, easing: 'easeOutCirc' });
+	    $(this).text(_percentage(currentWei, hardcap) + " %");
+	    
+	  });
+}
+
+function _percentage(_value, _hardcap){
+    //formula (value / hardcap) * 100
+    return (_value / _hardcap) * 100
 };
+
 
 
 // Pie Chart
 function pieCharts(){
+	
     Highcharts.chart('container', {
         chart: {
             type: 'pie',
@@ -273,10 +200,10 @@ function pieCharts(){
             type: 'pie',
             name: 'Token share',
             data: [
-                ['Team', forTeam],
-                ['Company', forCompany],
-                ['Airdrop', forAirdrop],
-                ['Tokens for Sale', forSale],
+                ['Team', Number(team)],
+                ['Company', Number(company)],
+                ['Airdrop', Number(airdrop)],
+                ['Tokens for Sale', Number(sale)],
                
                 
                 
@@ -284,11 +211,5 @@ function pieCharts(){
         }]
     });
 }
-setTimeout(pieCharts, 1000)
-
-
-
-
-
 
 

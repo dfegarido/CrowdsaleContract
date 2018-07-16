@@ -154,9 +154,9 @@
             <!-- End Sidebar scroll-->
             <!-- Bottom points-->
             <div class="sidebar-footer">
-                <!-- item--><a href="#" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+                <!-- item--><a href="#" class="link" data-toggle="tooltip" title="Settings" id="settings"><i class="ti-settings"></i></a>
                 <!-- item--><a href="#" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-                <!-- item--><a href="login.html" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+                <!-- item--><a href="#" id="logout" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
             <!-- End Bottom points-->
         </aside>
         <!-- ============================================================== -->
@@ -311,11 +311,11 @@
 
                                     <div class="col-lg-4 col-md-4 col-sm-12">
                                         <div class="row " >
-                                            <!-- <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <h4><b>Bonus Rate :</b></h4>
-                                                <h5> 50 % = 150 VPN</h5>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <h4><b>Total Supply :</b></h4>
+                                                <h5 id="totalSupply"> </h5>
                                                 <hr />
-                                            </div> -->
+                                            </div>
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <h4><b>Main Sale Starts at :</b></h4>
@@ -328,6 +328,31 @@
                                                 <h5 id="capresult"></h5>
                                                 <!-- <hr /> -->
                                             </div>
+
+                                        <!-- settings -->
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Change Contract Address</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Enter Contract Address...">
+                                                    <!-- <span class="input-group-addon"><button class="btn btn-default"></button></span> -->
+                                                </div>
+                                              </div>
+                                              <div class="modal-footer">
+                                                
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
                                             
                                         </div>
                                     </div>
@@ -396,7 +421,12 @@
     <script src="https://code.highcharts.com/highcharts-3d.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://cdn.ethers.io/scripts/ethers-v3.min.js"
+        charset="utf-8"
+        type="text/javascript">
+    </script>
     <script src="js/contract.js"></script>
+    <script src="js/jwt-decode.js"></script>
     <script src="js/main.js"></script>
 
 

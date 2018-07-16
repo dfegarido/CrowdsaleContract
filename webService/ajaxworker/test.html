@@ -1,9 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>VPN Cash Demo</title>
 
-    
+</head>
 
-    var abi = 
-    [
-    {
+
+
+<body>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<!-- This exposes the library as a global variable: ethers -->
+<script src="https://cdn.ethers.io/scripts/ethers-v3.min.js"
+        charset="utf-8"
+        type="text/javascript">
+</script>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6" id='btns'>
+			<button id="dumpAll" class="btn btn-md btn-info">Dump all datas</button><br /><br />
+		</div>
+		
+		<div class="col-lg-6">
+			<div id="dumpData"></div>
+		</div>
+		
+	</div>
+	
+
+</div>
+
+
+
+<script>
+
+	var abi = [{
       "constant": true,
       "inputs": [],
       "name": "rate",
@@ -531,47 +573,73 @@
     }
   ];
 
-var privateKey = "0xe1898dce8005b5e0a6f58659b56b4e95f28092b2f4d8f57bfc6762fa15a07e10";
+  	// network provider, of blockchain network
+	var provider = ethers.providers.getDefaultProvider("ropsten")
 
-var contractAddress = "0x5590186fa6ed9bd789b5425bf282eb9f107f0149";
-
-var wallet = new ethers.Wallet(privateKey);
-
-wallet.provider = ethers.providers.getDefaultProvider('ropsten');
-var token = new ethers.Contract(contractAddress, abi, wallet);
+	// contract Address
+	var contractAddress = "0x5590186fa6ed9bd789b5425bf282eb9f107f0149";
 
 
-$("#logout").on("click", function(){
-  window.localStorage.session = ''
-  window.location.href = 'login.html'
-});
+	var token = new ethers.Contract(contractAddress, abi, provider);
 
 
-// $("#settings").on("click",function(){
-//     $("#myModal").modal('show')
-// })
-
-$(window).on("load",function(){
-    $("#myModal").modal('show')
-})
+	// sample function
+	// token['wallet']().then(function(value){
+	// 		console.log(value.toString())
+	// })
 
 
+	// button that dump all the datas
+	$("#dumpAll").on('click',function(){
+		$("#dumpData").empty()
+		$.each(token.functions, function(k, v){
+			regex = new RegExp('^[a-zA-Z]*$');
+			filter = regex.test(k)
+			if(filter && k != 'finalize' && k != 'claimRefund' ){
+				try{
+					token[k]().then(function(val){
+					console.log(k)
+						$("#dumpData").append("<h3><strong>" +k+ "</strong> : " +val.toString()+ "</h3>");
 
-
-
-x = 0
-y = 1
-function f(){
-  z = x + y;
-  console.log(z)
-  x = y
-  y = z 
-  //sleep time so we can follow the result
-  setTimeout(f, 1000)
-}
+					})
+				}catch(err){
+					// console.log(err)
+				}
+			}
+		})
+	});
 
 
 
+	// button that get the result from the eth network
+	$.each(token.functions, function(k, v){
+			regex = new RegExp('^[a-zA-Z]*$');
+			filter = regex.test(k)
+			
+			if(filter && k != 'finalize' && k != 'claimRefund' && k != 'buyTokens' && k != 'transferOwnership' && k != 'setCrowdsaleStage' && k != 'finish' && k != 'extendEndTime'){
+				$("#btns").append('<button id="' +k+ '" class="btn btn-md btn-info">' +k+ '</button><br /><br />')
+
+				$("#" + k).on('click',function(){
+					
+					$("#dumpData").empty()
+					token[k]().then(function(val){
+						$("#dumpData").append("<h3>" + val.toString() + "</h3>")
+						console.log(val.toString())
+					})
+					
+				})
+			}
+		})
 
 
 
+
+	
+
+
+</script>
+
+</body>
+
+
+</html>

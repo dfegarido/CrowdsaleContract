@@ -103,18 +103,23 @@
     <br />
     <br />
     <h2 class="text-center">Admin Login</h2>
-    <form action="/sitePage/lite/index.html" method="get">
+    <form >
         <div class="avatar">
             <img src="../assets/images/avatar.png" alt="Avatar">
-        </div>           
+        </div>
+
+        <div class="alert alert-danger hide">
+            <p class="text-center"><strong>Invalid credentials !!!</strong></p>
+        </div>
+
         <div class="form-group">
-            <input type="text" class="form-control input-lg" name="username" placeholder="Username" required="required">
+            <input type="text" class="form-control input-lg" name="username" placeholder="Username" id="username" required="required">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control input-lg" name="password" placeholder="Password" required="required">
+            <input type="password" class="form-control input-lg" name="password" placeholder="Password" id="passwd" required="required">
         </div>        
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Sign in</button>
+            <button type="button" id="submit" class="btn btn-primary btn-lg btn-block login-btn">Sign in</button>
         </div>
 
         <!-- <p class="hint-text">Don't have an account? <a href="../../setupwizard/">Sign up here</a></p> -->
@@ -125,5 +130,52 @@
 <div class="text-center">
     <a href="/" class="btn btn-success btn-lg"><i class="fa fa-arrow-left"></i> &nbsp; Back to CrowdSale</a>
 </div>
+
+<script type="text/javascript">
+    // var username = "crowdsaleAdmin"
+    // var password = "7634HJa"
+
+    $("#submit").on("click",function(){
+        var username = $("#username").val();
+        var password = $("#passwd").val();
+
+        var data = {
+                  "query":"query($username:String!,$password:String!){auth(username:$username,password:$password)}",
+                  "variables":{
+                        "username":username,
+                        "password":password
+                      }
+                }
+
+        $.ajax({
+            url: "https://api.vpncash.org/query/",
+            headers: { 
+                'content-type': "application/json"
+            },
+            data:JSON.stringify(data),
+            type:"post",
+            success: function(result,status, xhr){
+                        if("errors" in result){
+                            // console.log("error")
+                            $(".alert").removeClass("hide")
+                        }else{
+                            encoderesult = result.data.auth;
+                            // console.log(encoderesult)
+                            window.localStorage.setItem('session',encoderesult)
+                            window.location.href = "index.html"
+
+                        }
+                        
+                    },
+            error: function(x, s, e){
+                        console.log(x.status, s)
+                    }
+
+        });
+    });
+
+    
+</script>
+
 </body>
 </html>                            

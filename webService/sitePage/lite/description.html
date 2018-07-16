@@ -35,6 +35,9 @@
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
+
+
+
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -124,9 +127,9 @@
             <!-- End Sidebar scroll-->
             <!-- Bottom points-->
             <div class="sidebar-footer">
-                <!-- item--><a href="#" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+                <!-- item--><a href="#" class="link" data-toggle="tooltip" title="Settings" id="settings"><i class="ti-settings"></i></a>
                 <!-- item--><a href="#" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-                <!-- item--><a href="/sitePage/lite/login.html" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> 
+                <!-- item--><a href="#" class="link" data-toggle="tooltip" title="Logout" id="logout"><i class="mdi mdi-power"></i></a> 
             </div>
             <!-- End Bottom points-->
         </aside>
@@ -202,11 +205,11 @@
                                        <table class="table table-resposive table-hover" >
                                             <tr >
                                                 <th>Contract Address : </th>
-                                                <td  class="pull-right" id="contractAddress"></td>
+                                                <td  class="pull-right"  id="contractAddress"></td>
                                             </tr>
                                             <tr>
                                                 <th>Token Address : </th>
-                                                <td class="pull-right" id="tokenAddress"></td>
+                                                <td class="pull-right "  id="tokenAddress"></td>
                                             </tr>
                                             <tr>
                                                 <th>Vault Address : </th>
@@ -290,16 +293,38 @@
                                         <div class="col-lg-12 col-md-4 col-sm-12">
                                             <label>If Crowdsale Has already ended, This Distributed Funds must be filled by wallets!!!</label>
                                             <div class="form-group">
-                                              <input type="text" class="form-control " id="forTeamFunds" placeholder="Wallet Address For Team Funds" >
+                                              <input type="text" class="form-control " id="forTeamFunds" placeholder="Wallet Address For Team Funds" disabled="">
                                             </div>
                                             <div class="form-group">
-                                              <input type="text" class="form-control" id="forEcosystemFunds" placeholder="Wallet Address For Ecosystem Funds">
+                                              <input type="text" class="form-control" id="forEcosystemFunds" placeholder="Wallet Address For Ecosystem Funds" disabled="">
                                             </div>
                                             <div class="form-group">
-                                              <input type="text" class="form-control" id="forBoundAndAirdropFunds" placeholder="Wallet Address For Bounty and Airdrop Funds">
+                                              <input type="text" class="form-control" id="forBoundAndAirdropFunds" placeholder="Wallet Address For Bounty and Airdrop Funds" disabled="">
                                             </div>
-                                            <button class="btn btn-primary btn-sm" id="distributeFunds"> Distribute Funds </button>
+                                            <button class="btn btn-primary btn-sm " id="distributeFunds" disabled=""> Distribute Funds </button>
                                             <span>Result : <b id="distributeFundsResult"></b></span><br />
+                                        </div>
+
+
+
+                                        <!-- settings -->
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                ...
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
 
                                 
@@ -351,14 +376,17 @@
     <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
+
+    
+    <!-- This exposes the library as a global variable: ethers -->
+    <script src="https://cdn.ethers.io/scripts/ethers-v3.min.js"
+            charset="utf-8"
+            type="text/javascript">
+    </script>
     <script src="js/contract.js"></script>
+    <script src="js/jwt-decode.js"></script>
     <script src="js/description.js"></script>
-    <script>
- 
-
-
-
-</script>
+   
 </body>
 
 </html>

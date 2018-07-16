@@ -1,49 +1,69 @@
 
-// {"hardcap":"50",
-// "end_t":"1535904000",
-// "start_t":"1531115387",
-// "goal_total":"50",
-// "goal_reached":false,
-// "goal_ended":false,
-// "goal_finalized":null,
-// "token_max":"100000",
-// "token_address":"0x85cc8ddb2f9817ea4e7b7a72f8edb111ddd0490b",
-// "token_airdrop":"50",
-// "token_company":"30",
-// "token_team":"10",
-// "token_sale":"20",
-// "token_preICO":"60",
-// "wallet":"0x42e754186C1b7e16b5E1A5e994AB8D4482F5A6f3",
-// "rate":"100",
-// "stage":"PreICO",
-// "fund_raised":"25"}
-var getData;
+// const qry ={
+// 	  "query":"query{getCrowdsale{hardcap,end_t,start_t,goal_total,goal_reached,goal_ended,goal_finalized,token_max,token_address,token_airdrop,token_company,token_team,token_sale,token_preICO,wallet,rate,stage,fund_raised}}"
+// 	}
+// $.ajax({
+// 	url: "https://api.vpncash.org/query/",
+// 	headers: { 
+// 		'content-type': "application/json",
+// 	},
+// 	data:JSON.stringify(qry),
+// 	type:"post",
+// 	success: function(result,status, xhr){
+// 				getData = result.data.getCrowdsale
+// 				// console.log(getData);
+// 				countDown(getData.end_t);
+// 				progressBar(
+// 					getData.fund_raised,
+// 				 	getData.end_t,
+// 				 	getData.hardcap,
+// 				 	getData.goal_total,
+// 				 	getData.rate
+// 				 	);
+// 		    },
+// 	error: function(x, s, e){
+// 				console.log(x.status, s)
+// 			}
+// });
 
-const qry ={
-	  "query":"query{getCrowdsale{hardcap,end_t,start_t,goal_total,goal_reached,goal_ended,goal_finalized,token_max,token_address,token_airdrop,token_company,token_team,token_sale,token_preICO,wallet,rate,stage,fund_raised}}"
+$(window).on("load",function(){
+	let currentWei;
+	let endDate;
+	let hardcap;
+	let rate;
+	let goal;
+
+		
+	token.endTime().then(function(v){
+		endDate = v.toString()
+		countDown(v.toString())
+	});
+
+	token.rate().then(function(v){
+		rate = v.toString()
+		// console.log(currentWei)
+	});
+
+	token.cap().then(function(v){
+		hardcap = v.toString() / 10**18
+	});
+
+	token.weiRaised().then(function(v){
+		currentWei = v.toString() / 10**18
+	});
+
+	token.goal().then(function(v){
+		goal = v.toString() / 10**18
+	});
+
+
+
+	function delay(){
+		progressBar(currentWei, endDate, hardcap, goal, rate)
 	}
-$.ajax({
-	url: "https://api.vpncash.org/query/",
-	headers: { 
-		'content-type': "application/json",
-	},
-	data:JSON.stringify(qry),
-	type:"post",
-	success: function(result,status, xhr){
-				getData = result.data.getCrowdsale
-				// console.log(getData);
-				countDown(getData.end_t);
-				progressBar(
-					getData.fund_raised,
-				 	getData.end_t,
-				 	getData.hardcap,
-				 	getData.goal_total,
-				 	getData.rate
-				 	);
-		    },
-	error: function(x, s, e){
-				console.log(x.status, s)
-			}
+	setTimeout(delay, 1000)
+	
+
 });
 
 

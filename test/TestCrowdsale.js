@@ -2,6 +2,9 @@ var HashnodeCrowdsale = artifacts.require("HashnodeCrowdsale");
 var HashnodeToken = artifacts.require("HashnodeToken");
 
 contract('HashnodeCrowdsale', function(accounts) {
+
+
+
     it('should deploy the token and store the address', function(done){
         HashnodeCrowdsale.deployed().then(async function(instance) {
             const token = await instance.token.call();
@@ -19,6 +22,7 @@ contract('HashnodeCrowdsale', function(accounts) {
        });
     });
 
+
     it('one ETH should buy 5 Hashnode Tokens in PreICO', function(done){
         HashnodeCrowdsale.deployed().then(async function(instance) {
             const data = await instance.sendTransaction({ from: accounts[7], value: web3.toWei(1, "ether")});
@@ -26,7 +30,7 @@ contract('HashnodeCrowdsale', function(accounts) {
             const hashnodeToken = HashnodeToken.at(tokenAddress);
             const tokenAmount = await hashnodeToken.balanceOf(accounts[7]);
             const rate = await instance.rate.call();
-            // console.log(web3.toWei(rate.toString(), 'ether'));
+            console.log(tokenAmount.toNumber() / 10**18);
             assert.equal(tokenAmount.toNumber(), Number(web3.toWei(rate.toString(), 'ether')), 'The sender didn\'t receive the tokens as per PreICO rate');
             done();
        });

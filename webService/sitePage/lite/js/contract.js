@@ -557,6 +557,20 @@ $(window).on("load",function(){
 
 
 
+// function trx(_trx){
+//   let url = "https://api-ropsten.etherscan.io/api?module=account&action=txlistinternal&txhash=" +_trx+ "&apikey=LXCXcs70wrLpSTS1z3Yb";
+
+//   $.ajax({
+//     url:url
+//   }).done(function(v){
+//     console.log(JSON.stringify(v))
+//   });
+
+// }
+
+
+
+
 
 
 // x = 0

@@ -392,14 +392,14 @@
     "absolutePath": "/D/CrowdsaleContract/contracts/HashnodeToken.sol",
     "exportedSymbols": {
       "HashnodeToken": [
-        585
+        586
       ]
     },
-    "id": 586,
+    "id": 587,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 572,
+        "id": 573,
         "literals": [
           "solidity",
           "^",
@@ -412,10 +412,10 @@
       {
         "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/MintableToken.sol",
         "file": "../node_modules/zeppelin-solidity/contracts/token/MintableToken.sol",
-        "id": 573,
+        "id": 574,
         "nodeType": "ImportDirective",
-        "scope": 586,
-        "sourceUnit": 1679,
+        "scope": 587,
+        "sourceUnit": 1680,
         "src": "28:77:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -426,51 +426,51 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 574,
+              "id": 575,
               "name": "MintableToken",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1678,
+              "referencedDeclaration": 1679,
               "src": "135:13:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MintableToken_$1678",
+                "typeIdentifier": "t_contract$_MintableToken_$1679",
                 "typeString": "contract MintableToken"
               }
             },
-            "id": 575,
+            "id": 576,
             "nodeType": "InheritanceSpecifier",
             "src": "135:13:1"
           }
         ],
         "contractDependencies": [
-          1425,
-          1511,
-          1554,
-          1583,
-          1678,
-          1924
+          1426,
+          1512,
+          1555,
+          1584,
+          1679,
+          1925
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 585,
+        "id": 586,
         "linearizedBaseContracts": [
-          585,
-          1678,
-          1425,
-          1924,
-          1511,
-          1554,
-          1583
+          586,
+          1679,
+          1426,
+          1925,
+          1512,
+          1555,
+          1584
         ],
         "name": "HashnodeToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 578,
+            "id": 579,
             "name": "name",
             "nodeType": "VariableDeclaration",
-            "scope": 585,
+            "scope": 586,
             "src": "154:31:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -479,7 +479,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 576,
+              "id": 577,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "154:6:1",
@@ -491,7 +491,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "56504e4361736843",
-              "id": 577,
+              "id": 578,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -510,10 +510,10 @@
           },
           {
             "constant": false,
-            "id": 581,
+            "id": 582,
             "name": "symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 585,
+            "scope": 586,
             "src": "190:28:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -522,7 +522,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 579,
+              "id": 580,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "190:6:1",
@@ -534,7 +534,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "56504e",
-              "id": 580,
+              "id": 581,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -553,10 +553,10 @@
           },
           {
             "constant": false,
-            "id": 584,
+            "id": 585,
             "name": "decimals",
             "nodeType": "VariableDeclaration",
-            "scope": 585,
+            "scope": 586,
             "src": "223:26:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -565,7 +565,7 @@
               "typeString": "uint8"
             },
             "typeName": {
-              "id": 582,
+              "id": 583,
               "name": "uint8",
               "nodeType": "ElementaryTypeName",
               "src": "223:5:1",
@@ -577,7 +577,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3138",
-              "id": 583,
+              "id": 584,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -595,7 +595,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 586,
+        "scope": 587,
         "src": "109:144:1"
       }
     ],
@@ -605,14 +605,14 @@
     "absolutePath": "/D/CrowdsaleContract/contracts/HashnodeToken.sol",
     "exportedSymbols": {
       "HashnodeToken": [
-        585
+        586
       ]
     },
-    "id": 586,
+    "id": 587,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 572,
+        "id": 573,
         "literals": [
           "solidity",
           "^",
@@ -625,10 +625,10 @@
       {
         "absolutePath": "/D/CrowdsaleContract/node_modules/zeppelin-solidity/contracts/token/MintableToken.sol",
         "file": "../node_modules/zeppelin-solidity/contracts/token/MintableToken.sol",
-        "id": 573,
+        "id": 574,
         "nodeType": "ImportDirective",
-        "scope": 586,
-        "sourceUnit": 1679,
+        "scope": 587,
+        "sourceUnit": 1680,
         "src": "28:77:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -639,51 +639,51 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 574,
+              "id": 575,
               "name": "MintableToken",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1678,
+              "referencedDeclaration": 1679,
               "src": "135:13:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MintableToken_$1678",
+                "typeIdentifier": "t_contract$_MintableToken_$1679",
                 "typeString": "contract MintableToken"
               }
             },
-            "id": 575,
+            "id": 576,
             "nodeType": "InheritanceSpecifier",
             "src": "135:13:1"
           }
         ],
         "contractDependencies": [
-          1425,
-          1511,
-          1554,
-          1583,
-          1678,
-          1924
+          1426,
+          1512,
+          1555,
+          1584,
+          1679,
+          1925
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 585,
+        "id": 586,
         "linearizedBaseContracts": [
-          585,
-          1678,
-          1425,
-          1924,
-          1511,
-          1554,
-          1583
+          586,
+          1679,
+          1426,
+          1925,
+          1512,
+          1555,
+          1584
         ],
         "name": "HashnodeToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 578,
+            "id": 579,
             "name": "name",
             "nodeType": "VariableDeclaration",
-            "scope": 585,
+            "scope": 586,
             "src": "154:31:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -692,7 +692,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 576,
+              "id": 577,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "154:6:1",
@@ -704,7 +704,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "56504e4361736843",
-              "id": 577,
+              "id": 578,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -723,10 +723,10 @@
           },
           {
             "constant": false,
-            "id": 581,
+            "id": 582,
             "name": "symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 585,
+            "scope": 586,
             "src": "190:28:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -735,7 +735,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 579,
+              "id": 580,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "190:6:1",
@@ -747,7 +747,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "56504e",
-              "id": 580,
+              "id": 581,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -766,10 +766,10 @@
           },
           {
             "constant": false,
-            "id": 584,
+            "id": 585,
             "name": "decimals",
             "nodeType": "VariableDeclaration",
-            "scope": 585,
+            "scope": 586,
             "src": "223:26:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -778,7 +778,7 @@
               "typeString": "uint8"
             },
             "typeName": {
-              "id": 582,
+              "id": 583,
               "name": "uint8",
               "nodeType": "ElementaryTypeName",
               "src": "223:5:1",
@@ -790,7 +790,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3138",
-              "id": 583,
+              "id": 584,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -808,7 +808,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 586,
+        "scope": 587,
         "src": "109:144:1"
       }
     ],
@@ -819,6 +819,6 @@
     "version": "0.4.24+commit.e67f0147.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "2.0.0",
-  "updatedAt": "2018-07-18T01:51:06.842Z"
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-23T07:37:12.902Z"
 }

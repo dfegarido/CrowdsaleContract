@@ -3,6 +3,7 @@ pragma solidity ^0.4.18;
 import './HashnodeToken.sol';
 import '../node_modules/zeppelin-solidity/contracts/crowdsale/CappedCrowdsale.sol';
 import '../node_modules/zeppelin-solidity/contracts/crowdsale/RefundableCrowdsale.sol';
+import '../node_modules/zeppelin-solidity/contracts/token/BasicToken.sol';
 contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
 
   // ICO Stage

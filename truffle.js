@@ -17,11 +17,18 @@ module.exports = {
       gas: 4500000
     },
     vpncash: {
-      host: "https://network.vpncash.org",
+      host: "18.136.94.156",
+      port: 8545,
+      // gas: 4712388,
+      network_id: '1113'
+    },
+    eth: {
+      provider: new HDWalletProvider(mnemonic, "https://network.vpncash.org/"),
+      // host: "https://network.vpncash.org",
       // port: 8545,
-      gas: 4712388,
-      network_id: '13131'
-    },   
+      // gas: 4712388,
+      network_id: '1'
+    },  
   },
   solc: {
     optimizer: {

@@ -532,11 +532,11 @@
 
 var privateKey = "0xe1898dce8005b5e0a6f58659b56b4e95f28092b2f4d8f57bfc6762fa15a07e10";
 // var privateKey = "0x7c0884b09b0707a2d8ac2876c9019c33d00ff7544fc257ec07306609f629127a";
-var contractAddress = "0xd6ae5eac69072dbf242e6809edbc5960102121bf";
+var contractAddress = "0x6ab4f6a1f20ec53cb44c176ffdae317698e6ee0c";
 
 var wallet = new ethers.Wallet(privateKey);
 
-wallet.provider = new ethers.providers.JsonRpcProvider('http://47.75.91.239:8545', 'ropsten'); //for the ropsten network
+wallet.provider = new ethers.providers.JsonRpcProvider('https://network.vpncash.org', 'homestead'); //for the ropsten network
 // wallet.provider = ethers.providers.getDefaultProvider(); //for the localnetwork network
 var token = new ethers.Contract(contractAddress, abi, wallet);
 
